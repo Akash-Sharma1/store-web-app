@@ -1,0 +1,38 @@
+@import "../core/variables";
+
+.landing-page {
+  &__item {
+    max-width: 30rem;
+  }
+  &__tabs {
+    display: flex;
+    flex-direction: row;
+    // align-items: center;
+    padding: 1rem 0 5rem 0;
+  }
+  &__conatiner {
+    padding: 7rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__heading {
+    // color: $black;
+    // // text-align: center;
+    padding: 2rem;
+  }
+  &__carausal {
+    align-items: center;
+    width: 30rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__carausal-image {
+    width: 30rem;
+    height: 20rem;
+    display: inline-flex !important;
+  }
+}

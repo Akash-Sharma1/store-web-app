@@ -7,17 +7,16 @@ import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
 // core components
-import Header from "components/Header/Header.js";
-import HeaderLinks from "components/Header/HeaderLinks.js";
-import Footer from "components/Footer/Footer.js";
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Button from "components/CustomButtons/Button.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import CardFooter from "components/Card/CardFooter.js";
-import CustomInput from "components/CustomInput/CustomInput.js";
+import Header from "components/common/Header/Header.js";
+import Footer from "components/common/Footer/Footer.js";
+import GridContainer from "components/common/Grid/GridContainer.js";
+import GridItem from "components/common/Grid/GridItem.js";
+import Button from "components/common/CustomButtons/Button.js";
+import Card from "components/common/Card/Card.js";
+import CardBody from "components/common/Card/CardBody.js";
+import CardHeader from "components/common/Card/CardHeader.js";
+import CardFooter from "components/common/Card/CardFooter.js";
+import CustomInput from "components/common/CustomInput/CustomInput.js";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -38,7 +37,6 @@ export default function LoginPage(props) {
         absolute
         color="transparent"
         brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
         {...rest}
       />
       <div

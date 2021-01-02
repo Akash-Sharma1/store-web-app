@@ -5,16 +5,16 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Small from "components/Typography/Small.js";
-import Danger from "components/Typography/Danger.js";
-import Warning from "components/Typography/Warning.js";
-import Success from "components/Typography/Success.js";
-import Info from "components/Typography/Info.js";
-import Primary from "components/Typography/Primary.js";
-import Muted from "components/Typography/Muted.js";
-import Quote from "components/Typography/Quote.js";
+import GridContainer from "components/common/Grid/GridContainer.js";
+import GridItem from "components/common/Grid/GridItem.js";
+import Small from "components/common/Typography/Small.js";
+import Danger from "components/common/Typography/Danger.js";
+import Warning from "components/common/Typography/Warning.js";
+import Success from "components/common/Typography/Success.js";
+import Info from "components/common/Typography/Info.js";
+import Primary from "components/common/Typography/Primary.js";
+import Muted from "components/common/Typography/Muted.js";
+import Quote from "components/common/Typography/Quote.js";
 
 import image from "assets/img/faces/avatar.jpg";
 
