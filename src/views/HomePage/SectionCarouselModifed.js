@@ -17,7 +17,7 @@ export default function SectionCarousel(props) {
   const classes = useStyles();
   function imageUi(c) {
     return (
-      <div>
+      <div key={c.image.default}>
         <img
           src={c.image.default}
           alt={c.title}

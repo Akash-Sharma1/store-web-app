@@ -57,7 +57,7 @@ export default function HeaderFixed(props) {
       }
       fixed
       changeColorOnScroll={{
-        height: 100,
+        height: 150,
         color: "white"
       }}
     />
