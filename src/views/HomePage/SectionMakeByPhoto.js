@@ -1,68 +1,64 @@
-import React, {useState} from "react";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
 
-// @material-ui/icons
+import { makeStyles } from "@material-ui/core/styles";
+import { mobxify } from 'utils/hoc';
+
 import Dashboard from "@material-ui/icons/Dashboard";
 import Schedule from "@material-ui/icons/Schedule";
 import List from "@material-ui/icons/List";
 
-// core components
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import Slider from "nouislider";
-import CustomInput from "components/common/CustomInput/CustomInput.js";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+// import CustomInput from "components/common/CustomInput/CustomInput.js";
 import NavPills from "components/common/NavPills/NavPills.js";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/pillsStyle.js";
-
 const useStyles = makeStyles(styles);
 
-export default function SectionMakeByPhoto() {
-  const [budgetSliderValue, setBudgetSliderValue] = useState(null);
-  const [timeSliderValue, setTimeSliderValue] = useState(null);
-  const [renderedContent, setRenderedContent] = useState(false);
+function SectionMakeByPhoto({ HomePageStore: store }) {
 
-  React.useEffect(() => {
-    if(renderedContent) {
+  useEffect(() => {
+    const timer = setInterval(() => {
       const sliderBudget = document.getElementById("budgetSlider");
       const sliderTime = document.getElementById("timeSlider");
-      if(
-        sliderBudget && sliderTime
-        && !sliderBudget.classList.contains("noUi-target")
+
+      if(!sliderBudget && !sliderTime) {
+        return;
+      }
+      if (
+        !sliderBudget.classList.contains("noUi-target")
         && !sliderTime.classList.contains("noUi-target")
       ) {
-        const budgetStarters = [5000, 20000];
-        const timeStarters = [7, 45];
-
         Slider.create(sliderBudget, {
-          start: budgetStarters,
+          start: store.budgetSlider,
           connect: [false, true, false],
           step: 1000,
           range: { min: 100, max: 100000 }
         });
         
         Slider.create(sliderTime, {
-          start: timeStarters,
+          start: store.timeSlider,
           connect: [false, true, false],
           step: 1,
           range: { min: 1, max: 60 }
         });
 
-        setBudgetSliderValue(budgetStarters);
-        setTimeSliderValue(timeStarters);
+        sliderBudget.noUiSlider.on('update', function (values) {
+          store.setBudgetSlider(values);
+        });
+      
+        sliderTime.noUiSlider.on('update', function (values) {
+          store.setTimeSlider(values);
+        });
       }
-    }
-  },[renderedContent]);
+      console.log(timer);
+      clearInterval(timer);
+    }, 100);
 
-  if(renderedContent) {
-    document.getElementById("budgetSlider").noUiSlider.on('update', function (values) {
-      setBudgetSliderValue(values);
-    });
-  
-    document.getElementById("timeSlider").noUiSlider.on('update', function (values) {
-      setBudgetSliderValue(values);
-    });
-  }
+    if(document.getElementById("budgetSlider") && document.getElementById("timeSlider")) {
+      clearInterval(timer);
+    }
+  },[store]);
 
   const classes = useStyles();
 
@@ -74,7 +70,7 @@ export default function SectionMakeByPhoto() {
         <span>
           <h3>Gathering requirements</h3>
           <br/>
-          <div style={{padding:"0 0 1rem 0"}}>
+          <div id="requirementUploadedPhoto" style={{padding:"0 0 1rem 0"}}>
             <label>Upload the photograph that you wish to order / know about.</label>
             <br/>
             <input
@@ -86,6 +82,11 @@ export default function SectionMakeByPhoto() {
             <label>Description</label>
             <br/>
             <TextareaAutosize
+              defaultValue = {store.requirementsDescription}
+              onChange = {e => {
+                store.setRequirementDescription(e.target.value)
+                console.log(store.requirementsDescription);
+              }}
               className="landing-page__textarea"
               placeholder="Details of the required product / anything you want to highlight"
             />
@@ -106,8 +107,14 @@ export default function SectionMakeByPhoto() {
           <div id="timeSlider" className="slider-info landing-page__slider" />
           <br/>
           <p>
-            <li>Expected Price is from {budgetSliderValue[0]} to {budgetSliderValue[1]} INR.</li>
-            <li>Expected waiting time is in between {timeSliderValue[0]} to {timeSliderValue[1]} days.</li>
+            <li>Expected Price is from
+              {' '}
+              <b>{parseInt(store.budgetSlider[0])}</b> to <b>{parseInt(store.budgetSlider[1])}</b> INR.
+            </li>
+            <li>Expected waiting time is in between
+              {' '}
+              <b>{parseInt(store.timeSlider[0])}</b> to <b>{parseInt(store.timeSlider[1])}</b> days.
+            </li>
           </p>
         </span>
       )
@@ -159,3 +166,5 @@ export default function SectionMakeByPhoto() {
     </div>
   );
 }
+
+export default mobxify('HomePageStore')(SectionMakeByPhoto);

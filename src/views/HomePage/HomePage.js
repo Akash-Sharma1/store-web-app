@@ -2,6 +2,7 @@ import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
+
 import "assets/scss/landing-page/landing-page.scss"
 
 import HeaderFixed from "views/Common/Ui/Header/HeaderFixed.js";
@@ -13,7 +14,7 @@ import SectionMakeByPhoto from "./SectionMakeByPhoto";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 const useStyles = makeStyles(styles);
 
-export default function LandingPage(props) {
+function HomePage() {
   const classes = useStyles();
   return(
     <div>
@@ -27,3 +28,5 @@ export default function LandingPage(props) {
     </div>
   );
 }
+
+export default HomePage;
