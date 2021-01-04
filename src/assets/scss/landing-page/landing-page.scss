@@ -4,6 +4,18 @@
   &__item {
     max-width: 30rem;
   }
+  &__non-parrallal-banner {
+    position: relative;
+    z-index: 0;
+    top: -2rem;
+    background-size: cover;
+    background-position: center center;
+    z-index: 0;
+  }
+  &__banner-overlay {
+    backdrop-filter: brightness(0.5);
+    z-index: 2rem;
+  }
   &__tabs {
     display: flex;
     flex-direction: row;
@@ -21,6 +33,7 @@
     // color: $black;
     // // text-align: center;
     padding: 0 0 2rem 0;
+    font-size: xx-large;
   }
   &__carausal {
     align-items: center;

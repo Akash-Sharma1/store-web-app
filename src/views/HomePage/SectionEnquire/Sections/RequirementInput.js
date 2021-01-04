@@ -16,9 +16,7 @@ function RequirementInput({ EnquireStore: store }) {
           type="file"
         />
       </div>
-      <p>OR</p>
       <div style={{padding:"0 0 1rem 0"}}>
-        <label>Description</label>
         <br/>
         <TextareaAutosize
           defaultValue = {store.requirements.description}
@@ -26,7 +24,6 @@ function RequirementInput({ EnquireStore: store }) {
           className="enquire__textarea"
           placeholder="Details of the required product / anything you want to highlight"
         />
-        <br/>
         <br/>
         <CustomInput
           labelText="Size"

@@ -10,6 +10,7 @@ import Footer from "components/common/Footer/Footer.js";
 import SectionBanner  from "./SectionBanner";
 import SectionTabs from "./SectionTabs";
 import SectionEnquire from "./SectionEnquire";
+import SectionProductDisplay from './SectionProductDisplay';
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 const useStyles = makeStyles(styles);
@@ -24,6 +25,7 @@ function HomePage() {
         <SectionTabs />
         <SectionEnquire />
       </div>
+      <SectionProductDisplay />
       <Footer />
     </div>
   );

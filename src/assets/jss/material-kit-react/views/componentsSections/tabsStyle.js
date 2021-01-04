@@ -1,4 +1,4 @@
-import { container } from "assets/jss/material-kit-react.js";
+import { container, title } from "assets/jss/material-kit-react.js";
 
 const tabsStyle = {
   section: {
@@ -8,6 +8,9 @@ const tabsStyle = {
   container,
   textCenter: {
     textAlign: "center"
+  },
+  title: {
+    ...title
   }
 };
 

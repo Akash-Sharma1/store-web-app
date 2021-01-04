@@ -1,5 +1,4 @@
 import React from "react";
-// @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
 import CustomTabs from "components/common/CustomTabs/CustomTabs.js";
@@ -50,7 +49,11 @@ function SectionTabs({ HomePageStore : store }) {
     <div className={classes.section}>
       <div className={classes.container}>
         <div id="nav-tabs">
-          <h3 className="landing-page__heading">Featured Products</h3>
+          <div className={classes.title}>
+            <div className="landing-page__heading"> 
+              Featured Products
+            </div>
+          </div>
           <div>
             <CustomTabs
               headerColor="primary"

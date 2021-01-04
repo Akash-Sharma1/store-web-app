@@ -21,7 +21,9 @@ function SectionEnquire({ EnquireStore: store }) {
       <div className={classes.container}>
         <div id="navigation-pills">
           <div className={classes.title}>
-            <h3>Custom product dashboard</h3>
+            <div className="landing-page__heading">
+              Building Custom Products
+            </div>
           </div>
           <div>
             <h4>

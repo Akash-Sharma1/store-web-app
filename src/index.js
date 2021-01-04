@@ -13,7 +13,7 @@ import stores from "store";
 import Components from "views/Components/Components.js";
 import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
-import HomePage from "views/HomePage/HomePage.js";
+import HomePage from "views/HomePage";
 
 var hist = createBrowserHistory();  
 
