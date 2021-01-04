@@ -1,19 +1,8 @@
 import {
-  action, makeObservable, observable, computed
+  makeObservable, computed
 } from 'mobx';
 
 class HomePage {
-  userDetails = {
-    phone: '',
-    email: '',
-    name: '',
-  };
-
-  budgetSlider = [5000, 20000];
-  timeSlider = [7, 45];
-
-  requirementsDescription = '';
-
   tagTitles = ['All', 'Faces', 'Marble', 'Painting'];
 
   imageList = [
@@ -67,33 +56,8 @@ class HomePage {
     return this.tagTitles;
   }
 
-  setUserDetails(item, value) {
-    let temp = this.userDetails;
-    temp[item] = value;
-    this.userDetails = temp;
-  }
-
-  setBudgetSlider(value) {
-    this.budgetSlider = value;
-  }
-
-  setTimeSlider(value) {
-    this.timeSlider = value;
-  }
-
-  setRequirementDescription(value) {
-    this.requirementsDescription = value;
-  }
-
   constructor() {
     makeObservable(this, {
-      userDetails: observable,
-      budgetSlider: observable,
-      timeSlider: observable,
-      setBudgetSlider: action.bound,
-      setTimeSlider: action.bound,
-      setUserDetails: action.bound,
-      setRequirementDescription: action.bound,
       ImageTags: computed,
     });
   }

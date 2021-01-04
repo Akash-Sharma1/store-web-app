@@ -18,7 +18,7 @@ export default function LandingPage(props) {
       id="home-banner"
     >
         <div className={classes.container}>
-          <div className="landing-page__conatiner">
+          <div className="landing-page__container">
             <div className="landing-page__item">
               <h1 className={classes.title}>Your one marketplace for all stone products.</h1>
               <br />
