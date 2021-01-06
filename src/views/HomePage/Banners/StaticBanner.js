@@ -8,7 +8,7 @@ import Button from "components/common/CustomButtons/Button.js";
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 const useStyles = makeStyles(styles);
 
-export default function ParallaxBanner(props) {
+export default function StaticBanner(props) {
   const classes = useStyles();
   return (
     <div
@@ -30,13 +30,11 @@ export default function ParallaxBanner(props) {
               <br />
               <Button
                 color="danger"
-                size="lg"
-                href="#home-banner"
-                // target="_blank"
+                href="/categories"
                 rel="noopener noreferrer"
               >
                 <i className="fas fa-play" />
-                Shop Now
+                Explore Categories
               </Button>
             </div>
           </div>

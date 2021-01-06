@@ -25,19 +25,17 @@ export default function HeaderFixed(props) {
         <List className={classes.list}>
           <ListItem className={classes.listItem}>
             <Button
-              href="#home-banner"
+              href="/"
               className={classes.navLink + " " + classes.navLinkActive}
-              onClick={e => e.preventDefault()}
               color="transparent"
             >
-              <Explore className={classes.icons} /> Discover
+              <Explore className={classes.icons} /> Home
             </Button>
           </ListItem>
           <ListItem className={classes.listItem}>
             <Button
-              href="#pablo"
+              href="/profile"
               className={classes.navLink}
-              onClick={e => e.preventDefault()}
               color="transparent"
             >
               <AccountCircle className={classes.icons} /> Profile
@@ -45,12 +43,11 @@ export default function HeaderFixed(props) {
           </ListItem>
           <ListItem className={classes.listItem}>
             <Button
-              href="#pablo"
+              href="/shop"
               className={classes.navLink}
-              onClick={e => e.preventDefault()}
               color="transparent"
             >
-              <Icon className={classes.icons}>settings</Icon> Settings
+              <Icon className={classes.icons}>settings</Icon> Shop
             </Button>
           </ListItem>
         </List>

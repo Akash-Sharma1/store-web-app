@@ -1,10 +1,14 @@
 import React from "react";
+import { mobxify } from "utils/hoc";
 import { makeStyles } from "@material-ui/core/styles";
 
+import GridContainer from "components/common/Grid/GridContainer.js";
+import GridItem from "components/common/Grid/GridItem.js";
 import CustomTabs from "components/common/CustomTabs/CustomTabs.js";
+
 import styles from "assets/jss/material-kit-react/views/componentsSections/tabsStyle.js";
 import SectionCarousel from "./SectionCarousel";
-import { mobxify } from "utils/hoc";
+
 
 const useStyles = makeStyles(styles);
 
@@ -31,15 +35,16 @@ function SectionTabs({ HomePageStore : store }) {
       {
         tabName: tab.title,
         tabContent: (
-          <div className="landing-page__tabs">
-            <div>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={8} md={6}>
               <SectionCarousel content={tab.images} />
-            </div>
-            <p>
-              {tab.description}
-            </p>
-            <br/><br/>
-          </div>
+            </GridItem>
+            <GridItem xs={12} sm={4} md={6}>
+              <p className="landing-page__image-description">
+                {tab.description}
+              </p>
+            </GridItem>
+          </GridContainer>
         )
       }
     );

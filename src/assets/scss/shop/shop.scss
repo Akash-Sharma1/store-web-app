@@ -1,0 +1,14 @@
+.shop {
+  &__align-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__full-wh {
+    width:100%;
+    height:100%;
+  }
+  &__text-c {
+    text-align: center;
+  }
+}

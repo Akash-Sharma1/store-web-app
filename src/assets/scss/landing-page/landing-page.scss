@@ -16,6 +16,12 @@
     backdrop-filter: brightness(0.5);
     z-index: 2rem;
   }
+  &__image-description {
+    font-size: large;
+    padding: 2rem 0 0 0;
+    color: $gray;
+    text-align: start;
+  }
   &__tabs {
     display: flex;
     flex-direction: row;
@@ -37,15 +43,15 @@
   }
   &__carausal {
     align-items: center;
-    width: 30rem;
-    height: 20rem;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
   &__carausal-image {
-    width: 30rem;
-    height: 20rem;
+    width: 100%;
+    height: 100%;
     display: inline-flex !important;
   }
 }

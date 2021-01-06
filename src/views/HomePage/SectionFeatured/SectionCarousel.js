@@ -1,15 +1,25 @@
 import React from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
-
 import Carousel from "react-slick";
+import GridContainer from "components/common/Grid/GridContainer.js";
+import GridItem from "components/common/Grid/GridItem.js";
 import Card from "components/common/Card/Card.js";
+
 import styles from "assets/jss/material-kit-react/views/componentsSections/carouselStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SectionCarousel(props) {
+export default function SectionCarousel(props) {
   const classes = useStyles();
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false
+  };
 
   function imageUi(c) {
     return (
@@ -30,26 +40,19 @@ function SectionCarousel(props) {
 
   const images = props.content.map(c => imageUi(c));
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true
-  };
-
   return (
-    <div className="landing-page__carausal">
+    <div className={classes.section}>
       <div className={classes.container}>
-        <Card carousel>
-          <Carousel {...settings}>
-            {images}
-          </Carousel>
-        </Card>
+        <GridContainer>
+          <GridItem xs={12} sm={12} md={12} className={classes.marginAuto}>
+            <Card carousel>
+              <Carousel {...settings}>
+                {images}
+              </Carousel>
+            </Card>
+          </GridItem>
+        </GridContainer>
       </div>
     </div>
   );
 }
-
-export default SectionCarousel;

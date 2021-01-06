@@ -8,8 +8,6 @@ import Camera from "@material-ui/icons/Camera";
 import Palette from "@material-ui/icons/Palette";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Header from "components/common/Header/Header.js";
-import Footer from "components/common/Footer/Footer.js";
 import Button from "components/common/CustomButtons/Button.js";
 import GridContainer from "components/common/Grid/GridContainer.js";
 import GridItem from "components/common/Grid/GridItem.js";
@@ -44,16 +42,6 @@ export default function ProfilePage(props) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
-      <Header
-        color="transparent"
-        brand="Material Kit React"
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: "white"
-        }}
-        {...rest}
-      />
       <Parallax small filter image={require("assets/img/profile-bg.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
@@ -207,7 +195,6 @@ export default function ProfilePage(props) {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

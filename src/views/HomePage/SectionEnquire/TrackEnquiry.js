@@ -6,6 +6,8 @@ import Schedule from "@material-ui/icons/Schedule";
 
 import EnquireDetails from './Sections/EnquireDetails';
 
+import GridItem from "components/common/Grid/GridItem.js";
+import GridContainer from "components/common/Grid/GridContainer.js";
 import CustomInput from "components/common/CustomInput/CustomInput.js";
 import Button from "components/common/CustomButtons/Button.js";
 import StatusDetails from "./Sections/StatusDetails";
@@ -40,45 +42,52 @@ function TrackEnquiry({ EnquireStore: store }) {
     }
   }
   return (
-    <>
-      <div className="enquire__req-display">
+    <GridContainer>
+      <GridItem xs={8} sm={8} md={8}>
         <CustomInput
-          labelText="Enter enquiry number"
+          labelText="Enquiry number"
+          formControlProps={{
+            fullWidth: true
+          }}
           inputProps={{
             type: "text",
             value: store.enquiryNumber,
             onChange: (e) => store.setEnquiryNumber(e.target.value),
           }}
         />
-        <Button
-          className="enquire__find-btn"
-          size="sm"
-          color={store.validateEnquireForm ? "success" : "default"}
-        >
-          Find
-        </Button>
-      </div>
-
-      <NavPills
-        color="info"
-        horizontal={{
-          tabsGrid: { xs: 3, sm: 3, md: 3 },
-          contentGrid: { xs: 10, sm: 8, md: 8 }
-        }}
-        tabs={[
-          {
-            tabButton: "Requirements",
-            tabIcon: Dashboard,
-            tabContent: enquireDetailsUi()
-          },
-          {
-            tabButton: "Status",
-            tabIcon: Schedule,
-            tabContent: statusDetailsUi()
-          }
-        ]}
-      />
-    </>
+      </GridItem>
+      <GridItem xs={4} sm={4} md={4}>
+        <div className="enquire__track-find-btn">
+          <Button
+            size="sm"
+            color={store.validateEnquireForm ? "success" : "default"}
+          >
+            Find
+          </Button>
+        </div>
+      </GridItem>
+      <GridItem xs={12} sm={12} md={12}>
+        <NavPills
+          color="info"
+          horizontal={{
+            tabsGrid: { xs: 12, sm: 3, md: 3 },
+            contentGrid: { xs: 12, sm: 9, md: 9 }
+          }}
+          tabs={[
+            {
+              tabButton: "Requirements",
+              tabIcon: Dashboard,
+              tabContent: enquireDetailsUi()
+            },
+            {
+              tabButton: "Status",
+              tabIcon: Schedule,
+              tabContent: statusDetailsUi()
+            }
+          ]}
+        />
+      </GridItem>
+    </GridContainer>
   );
 }
 

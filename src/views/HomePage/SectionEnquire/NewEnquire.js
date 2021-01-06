@@ -45,9 +45,7 @@ function NewEnquire({ EnquireStore: store }) {
           <EnquireDetails />
           <br/><br/>
           <Button
-            size="lg"
-            color={store.validateEnquireForm ? "success" : "default"}
-            disabled={!store.validateEnquireForm}
+            color="success"
           >
             Submit request
           </Button>
@@ -60,8 +58,8 @@ function NewEnquire({ EnquireStore: store }) {
     <NavPills
       color="info"
       horizontal={{
-        tabsGrid: { xs: 3, sm: 3, md: 3 },
-        contentGrid: { xs: 10, sm: 8, md: 8 }
+        tabsGrid: { xs: 12, sm: 3, md: 3 },
+        contentGrid: { xs: 12, sm: 9, md: 9 }
       }}
       tabs={tabsContent}
     />
