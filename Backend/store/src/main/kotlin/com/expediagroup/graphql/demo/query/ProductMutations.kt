@@ -7,14 +7,14 @@ import com.expediagroup.graphql.demo.repository.*
 
 @Component
 class ProductMutations(
-  private val staticProductRepository: StaticProductRepository,
+  private val productRepository: ProductRepository,
   private val customProductRepository: CustomProductRepository,
   private val userRepository: UserRepository
 ) : Mutation {
 
   fun addProduct(name: String, price: Float, description: String): Product{
-    val product = StaticProduct(name = name, price = price, description = description)
-    staticProductRepository.save(product)
+    val product = Product(name, description, price)
+    productRepository.save(product)
     return product
   }
 
@@ -29,11 +29,11 @@ class ProductMutations(
   }
 
   fun updateProduct(id: Long, name: String?, description: String?, price: Float?): Product{
-    var product = staticProductRepository.findById(id).get()
+    var product = productRepository.findById(id).get()
     product.name = name ?: product.name
     product.description = description ?: product.description
     product.price = price ?: product.price
-    staticProductRepository.save(product)
+    productRepository.save(product)
     return product
   }
 
@@ -53,9 +53,9 @@ class ProductMutations(
   }
 
   fun removeProduct(id: Long): Product {
-    val product = staticProductRepository.findById(id).get()
-    if (staticProductRepository.existsById(id)) {
-      staticProductRepository.deleteById(id)
+    val product = productRepository.findById(id).get()
+    if (productRepository.existsById(id)) {
+      productRepository.deleteById(id)
     }
     return product
   }

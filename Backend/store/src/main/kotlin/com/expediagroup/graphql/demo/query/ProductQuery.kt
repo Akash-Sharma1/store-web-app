@@ -7,12 +7,12 @@ import com.expediagroup.graphql.demo.repository.*
 
 @Component
 class ProductQuery(
-  private val staticProductRepository: StaticProductRepository,
+  private val productRepository: ProductRepository,
   private val customProductRepository: CustomProductRepository,
   private val userRepository: UserRepository
 ) : Query {
   fun product(id: Long) : Product{
-    return staticProductRepository.findById(id).get()
+    return productRepository.findById(id).get()
   }
 
   fun custom_product(id: Long) : CustomProduct{
@@ -20,7 +20,7 @@ class ProductQuery(
   }
   
   fun products() : List<Product> {
-    return staticProductRepository.findAll()
+    return productRepository.findAll()
   }
 
   fun custom_products(userId : Long) : List<CustomProduct>{

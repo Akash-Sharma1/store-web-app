@@ -25,14 +25,10 @@ data class CustomProduct(
 
   @get: NotNull
   var size: Float = 0f
-) : Product(){
-  init{
-    name = "CustomProduct"
-  }
+) : Product("CustomProduct", description, null){
   var req_status: ReqStatus = ReqStatus.REVIEW_PENDING
   var req_text: String? = ""
 }
-
 
 enum class ReqStatus {
   REVIEW_PENDING, IN_REVIEW, ANSWER
