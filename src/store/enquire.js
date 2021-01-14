@@ -1,6 +1,43 @@
 import {
   action, makeObservable, observable
 } from 'mobx';
+import { gql, useQuery, useMutation} from '@apollo/client';
+
+const ADD_CUSTOM_PRODUCT = gql`
+  mutation AddCustomProduct(
+    $userId: Long!, $maxd: Int!, $mind: Int!,
+    minp: Float!, maxp: Float!, desc: String!, size: Float
+  ) {
+    addCustomProduct()(
+      $userId: $userId,
+      $max_price: $maxp,
+      $min_price: $minp
+      $min_days: $mind
+      $max_days: $maxd
+      $description: $desc
+      $size: $size
+    ) {
+      id
+    }
+  }
+`;
+
+const GET_CUSTOM_PRODUCT = gql`
+  mutation AddCustomProduct($userId: Long!, id: Long!) {
+    addCustomProduct()(
+      $userId: $userId,
+      $id: $userId
+    ) {
+      description
+      max_price
+      min_price
+      max_days
+      min_days
+      size
+      status
+    }
+  }
+`;
 
 class Enquire {
   enquiryNumber = '';

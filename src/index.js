@@ -18,6 +18,13 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import HomePage from "views/HomePage";
 import ShopPage from "views/ShopPage";
 
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:8080/graphql',
+  cache: new InMemoryCache()
+});
 
 var hist = createBrowserHistory();  
 
@@ -25,18 +32,20 @@ var hist = createBrowserHistory();
 window._____APP_STATE_____ = stores;
 
 ReactDOM.render(
-  <Provider {...stores}>
-    <HeaderFixed/>
-    <Router history={hist}>
-      <Switch>
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/components" component={Components} />
-        <Route path="/shop" component={ShopPage} />
-        <Route path="/" component={HomePage} />
-      </Switch>
-    </Router>
-    <Footer />
-  </Provider>,
+  <ApolloProvider client={client}>
+    <Provider {...stores}>
+      <HeaderFixed/>
+      <Router history={hist}>
+        <Switch>
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/components" component={Components} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/" component={HomePage} />
+        </Switch>
+      </Router>
+      <Footer />
+    </Provider>
+  </ApolloProvider>,
   document.getElementById("root")
 );
