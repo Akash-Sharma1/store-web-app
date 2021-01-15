@@ -16,7 +16,7 @@ export default function StaticBanner(props) {
       style={{
         backgroundImage: (
           "url(" +
-          require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg").default
+          props.image
           + ")"
         )
         ,
@@ -26,15 +26,15 @@ export default function StaticBanner(props) {
         <div className={classes.container}>
           <div className="landing-page__container">
             <div className="landing-page__item">
-              <h1 className={classes.title}>Explore our Product categories</h1>
+              <h1 className={classes.title}>{props.title}</h1>
               <br />
               <Button
                 color="danger"
-                href="/categories"
+                href={props.buttonRoute}
                 rel="noopener noreferrer"
               >
                 <i className="fas fa-play" />
-                Explore Categories
+                {props.buttonText}
               </Button>
             </div>
           </div>

@@ -1,9 +1,14 @@
 import HomePageStore from './homepage';
-import EnquireStore from './enquire';
+import ProductStore  from './products';
+import CustomProductStore  from './customProducts';
+import AppStore from './appStore';
+
 
 const stores = {
   HomePageStore,
-  EnquireStore,
+  ProductStore,
+  CustomProductStore,
+  AppStore,
 };
 
 export default stores;

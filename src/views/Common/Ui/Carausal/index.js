@@ -38,7 +38,7 @@ export default function SectionCarousel(props) {
     );
   }
 
-  const images = props.content.map(c => imageUi(c));
+  const images = props.images.map(c => imageUi(c));
 
   return (
     <div className={classes.section}>

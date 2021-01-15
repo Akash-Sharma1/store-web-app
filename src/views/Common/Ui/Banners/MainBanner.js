@@ -14,27 +14,29 @@ export default function MainBanner(props) {
   return (
     <Parallax
       filter
-      image={require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg")}
+      image={props.image}
       id="home-banner"
     >
       <div className={classes.container}>
         <div className="landing-page__container">
           <div className="landing-page__item">
-            <h1 className={classes.title}>Your one marketplace for all stone products.</h1>
+            <h1 className={classes.title}>{props.title}</h1>
             <br />
-            <Button
-              color="danger"
-              size="lg"
-              href="/shop"
-              rel="noopener noreferrer"
-            >
-              <i className="fas fa-play" />
-              Shop Now
-            </Button>
+            {!props.noButton &&
+              <Button
+                color="danger"
+                size="lg"
+                href={props.buttonRoute}
+                rel="noopener noreferrer"
+              >
+                <i className="fas fa-play" />
+                {props.buttonText}
+              </Button>
+
+            }
           </div>
         </div>
       </div>
   </Parallax>
   );
 }
-

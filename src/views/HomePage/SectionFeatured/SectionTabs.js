@@ -7,7 +7,7 @@ import GridItem from "components/common/Grid/GridItem.js";
 import CustomTabs from "components/common/CustomTabs/CustomTabs.js";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/tabsStyle.js";
-import SectionCarousel from "./SectionCarousel";
+import SectionCarousel from "views/Common/Ui/Carausal";
 
 
 const useStyles = makeStyles(styles);
@@ -37,7 +37,7 @@ function SectionTabs({ HomePageStore : store }) {
         tabContent: (
           <GridContainer justify="center">
             <GridItem xs={12} sm={8} md={6}>
-              <SectionCarousel content={tab.images} />
+              <SectionCarousel images={tab.images} />
             </GridItem>
             <GridItem xs={12} sm={4} md={6}>
               <p className="landing-page__image-description">

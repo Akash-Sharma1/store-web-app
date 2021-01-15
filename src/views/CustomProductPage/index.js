@@ -6,33 +6,25 @@ import classNames from "classnames";
 import "assets/scss/landing-page/landing-page.scss";
 
 import MainBanner  from "views/Common/Ui/Banners/MainBanner";
-import StaticBanner from 'views/Common/Ui/Banners/StaticBanner';
-import Divider  from "./Divider";
+import SectionTabs  from "./SectionTabs";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 const useStyles = makeStyles(styles);
 
-function ShopPage() {
+function CustomProductPage() {
   const classes = useStyles();
   return(
     <div>
       <MainBanner
         image = {require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg")}
-        buttonText = "Explore Categories"
-        buttonRoute = "/categories"
-        title = "We have something of everthing"
+        noButton
+        title = "Transform imagination into reality"
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <Divider />
+        <SectionTabs />
       </div>
-      <StaticBanner
-        image = {require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg").default}
-        buttonText = "Explore now"
-        buttonRoute = "/shop/custom-product"
-        title = "Build custom products."
-      />
     </div>
   );
 }
 
-export default ShopPage;
+export default CustomProductPage;

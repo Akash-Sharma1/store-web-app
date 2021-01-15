@@ -47,7 +47,7 @@ export default function Header(props) {
     } else {
       document.body
         .getElementsByTagName("header")[0]
-        .classList.add(classes[color]);
+        .classList.add(classes["transparent"]);
       document.body
         .getElementsByTagName("header")[0]
         .classList.remove(classes[changeColorOnScroll.color]);

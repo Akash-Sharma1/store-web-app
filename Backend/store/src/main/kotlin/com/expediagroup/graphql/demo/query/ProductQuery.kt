@@ -15,15 +15,16 @@ class ProductQuery(
     return productRepository.findById(id).get()
   }
 
-  fun custom_product(id: Long) : CustomProduct{
-    return customProductRepository.findById(id).get()
+  fun customProduct(id: Long) : CustomProduct?{
+    val product = customProductRepository.findById(id).get()
+    return product
   }
   
   fun products() : List<Product> {
-    return productRepository.findAll()
+    return productRepository.findAll().filter{ it.name != "CustomProduct" }
   }
 
-  fun custom_products(userId : Long) : List<CustomProduct>{
+  fun customProducts(userId : Long) : List<CustomProduct>{
     val user = userRepository.findById(userId).get()
     return customProductRepository.findAllByUser(user)
   }

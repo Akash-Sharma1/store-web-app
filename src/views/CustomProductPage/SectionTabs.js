@@ -1,20 +1,24 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { mobxify } from 'utils/hoc';
 
-import "assets/scss/enquire/enquire.scss";
+import "assets/scss/custom-products/custom-products.scss";
 
-import CustomTabs from "components/common/CustomTabs/CustomTabs.js";
-import NewEnquire from "./NewEnquire";
+import CustomTabs from "components/common/CustomTabs/CustomTabsControllable.js";
+import NewProduct from "./NewProduct/index";
 import TrackEnquiry from "./TrackEnquiry";
-
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/pillsStyle.js";
 const useStyles = makeStyles(styles);
 
-function SectionEnquire({ EnquireStore: store }) {
+function SectionTabs({ CustomProductStore: store }) {
   const classes = useStyles();
+  const [activeTab, setActiveTab] = useState(0);
+
+  const switchTab = () => {
+    setActiveTab((activeTab+1)%2);
+  }
 
   return (
     <div className={classes.section}>
@@ -34,21 +38,23 @@ function SectionEnquire({ EnquireStore: store }) {
           </div>
           <div>
             <CustomTabs
+              value = {activeTab}
+              setValue = {setActiveTab}
               plainTabs
               headerColor="warning"
               tabs={[
                 {
                   tabName: "Enquire",
                   tabContent: (
-                    <div className="enquire__container">
-                      <NewEnquire />
+                    <div className="custom-p__container">
+                      <NewProduct switchTab={switchTab}/>
                     </div>
                   )
                 },
                 {
                   tabName: "Track",
                   tabContent: (
-                    <div className="enquire__container">
+                    <div className="custom-p__container">
                       <TrackEnquiry />
                     </div>
                   )
@@ -62,4 +68,4 @@ function SectionEnquire({ EnquireStore: store }) {
   );
 }
 
-export default mobxify('EnquireStore')(SectionEnquire);
+export default mobxify('CustomProductStore')(SectionTabs);

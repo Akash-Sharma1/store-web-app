@@ -15,11 +15,14 @@ import styles from "assets/jss/material-kit-react/components/snackbarContentStyl
 const useStyles = makeStyles(styles);
 
 export default function SnackbarContent(props) {
-  const { message, color, close, icon } = props;
+  const { message, color, close, icon, closeAction = null } = props;
   const classes = useStyles();
   var action = [];
   const closeAlert = () => {
     setAlert(null);
+    if(closeAction) {
+      closeAction();
+    }
   };
   if (close !== undefined) {
     action = [

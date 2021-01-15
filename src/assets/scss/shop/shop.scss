@@ -1,3 +1,5 @@
+@import "../core/variables";
+
 .shop {
   &__align-c {
     display: flex;
@@ -10,5 +12,73 @@
   }
   &__text-c {
     text-align: center;
+  }
+}
+
+.listing {
+  min-height: 20rem;
+  padding: 2rem;
+  &__container {
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+    grid-gap: 2rem;
+  }
+  &__item {
+    box-shadow: 0 0 0.5rem rgba(69, 69, 189, 0.212), 0 0 0.5rem rgba(99, 115, 160, 0.397);
+    border-color: $grey;
+    border-radius: 0.4rem;
+    padding: 0 !important;
+  }
+  &__image {
+    min-height: 10rem;
+    background-size: cover;
+    background-position: center center;
+  }
+  &__title {
+    &--text{
+      white-space: pre-wrap; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 7rem;
+      text-align: start;
+    }
+    padding: 0 0.5rem;
+  }
+  &__price {
+    color: $red-500;
+    text-align: start;
+    padding: 0 0.5rem;
+  }
+  &__INSTOCK{
+    color: $green-500;
+    padding: 0 0.5rem;
+    text-align: start;
+  }
+  &__OUTOFSTOCK{
+    color: $red-600;
+    padding: 0 0.5rem;
+    text-align: start;
+  }
+}
+
+.product { 
+  &__title{
+    color: $black;
+  }
+  &__price {
+    color: $red-500;
+    text-align: start;
+  }
+  &__INSTOCK{
+    color: $green-500;
+    text-align: start;
+  }
+  &__OUTOFSTOCK{
+    color: $red-600;
+    text-align: start;
+  }
+  &__word-wrap {    
+      overflow-wrap: break-word;
   }
 }

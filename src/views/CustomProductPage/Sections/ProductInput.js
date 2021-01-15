@@ -4,12 +4,12 @@ import { mobxify } from 'utils/hoc';
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import CustomInput from "components/common/CustomInput/CustomInput.js";
 
-function RequirementInput({ EnquireStore: store }) {
+function ProductInput({ CustomProductStore: store }) {
   return (
     <span>
       <h3>Gathering requirements</h3>
       <br/>
-      <div id="requirementUploadedPhoto" style={{padding:"0 0 1rem 0"}}>
+      <div style={{padding:"0 0 1rem 0"}}>
         <label>Upload the photograph that you wish to order / know about.</label>
         <br/>
         <input
@@ -19,9 +19,9 @@ function RequirementInput({ EnquireStore: store }) {
       <div style={{padding:"0 0 1rem 0"}}>
         <br/>
         <TextareaAutosize
-          defaultValue = {store.requirements.description}
-          onChange = {e => store.setRequirements('description', e.target.value)}
-          className="enquire__textarea"
+          defaultValue = {store.product.description}
+          onChange = {e => store.setProductItem('description', e.target.value)}
+          className="custom-p__textarea"
           placeholder="Details of the required product / anything you want to highlight"
         />
         <br/>
@@ -29,8 +29,8 @@ function RequirementInput({ EnquireStore: store }) {
           labelText="Size"
           inputProps={{
             type: "number",
-            value: store.requirements.size,
-            onChange: (e) => store.setRequirements('size', e.target.value),
+            value: store.product.size,
+            onChange: (e) => store.setProductItem('size', e.target.value),
             endAdornment: (
               <label>
                 inches
@@ -43,4 +43,4 @@ function RequirementInput({ EnquireStore: store }) {
   );
 }
 
-export default mobxify('EnquireStore')(RequirementInput);
+export default mobxify('CustomProductStore')(ProductInput);
