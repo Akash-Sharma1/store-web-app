@@ -1,13 +1,15 @@
 import {
-  action, makeObservable, observable
+  action, makeObservable, observable, flow
 } from 'mobx';
 import { gql } from '@apollo/client';
+
+import client from "utils/graphql"
 
 class productStore {
 
   GET_PRODUCTS = gql`
-    {
-      products{
+    query GetProduct($page: Long) {
+      products(page : $page){
         id
         name
         price
@@ -28,6 +30,10 @@ class productStore {
     }
   `;
 
+  isLoading = false;
+
+  loadingError = null;
+
   products = [];
 
   product = {
@@ -38,6 +44,10 @@ class productStore {
     reviews: '',
     images: '',
   };
+
+  setIsLoading(value) {
+    this.isLoading = value;
+  }
 
   setProduct(product) {
     let temp = {
@@ -83,13 +93,26 @@ class productStore {
     this.product = temp;
   }
 
+  getProducts = flow(function * (page = null) {
+    this.isLoading = true;
+    var res = yield client.query({
+      query: this.GET_PRODUCTS,
+      variables:{ page },
+    });
+    this.isLoading = false;
+    return res;
+  })
+
   constructor() {
     makeObservable(this, {
       products: observable,
       product: observable,
+      isLoading: observable,
+      loadingError: observable,
       setProduct: action.bound,
       setProducts: action.bound,
-      setProductItem: action.bound
+      setProductItem: action.bound,
+      setIsLoading: action.bound
     });
   }
 }

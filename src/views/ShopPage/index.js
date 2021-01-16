@@ -7,7 +7,7 @@ import "assets/scss/landing-page/landing-page.scss";
 
 import MainBanner  from "views/Common/Ui/Banners/MainBanner";
 import StaticBanner from 'views/Common/Ui/Banners/StaticBanner';
-import Divider  from "./Divider";
+import ListingLayout  from "./ListingLayout";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 const useStyles = makeStyles(styles);
@@ -23,7 +23,7 @@ function ShopPage() {
         title = "We have something of everthing"
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        <Divider />
+        <ListingLayout />
       </div>
       <StaticBanner
         image = {require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg").default}

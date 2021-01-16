@@ -23,76 +23,76 @@ function HeaderFixed({ AppStore: store}) {
     <>
       {
         store.notification.open ?
-        <Notify />
-        :
-        <Header
-        color={store.headerColor}
-        setColor={store.setHeaderColor}
-        brand="Mahendra Moorti Kalakar"
-        rightLinks={
-          <List className={classes.list}>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/"
-                className={classes.navLink + " " + classes.navLinkActive}
-                color="transparent"
-              >
-                <Explore className={classes.icons} /> Home
-              </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/profile"
-                className={classes.navLink}
-                color="transparent"
-              >
-                <AccountCircle className={classes.icons} /> Profile
-              </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/shop"
-                className={classes.navLink}
-                color="transparent"
-              >
-                Shop
-              </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/shop/custom-product"
-                className={classes.navLink}
-                color="transparent"
-              >
-                Build
-              </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/orders"
-                className={classes.navLink}
-                color="transparent"
-              >
-                Orders
-              </Button>
-            </ListItem>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/shop"
-                className={classes.navLink}
-                color="transparent"
-              >
-                Contact us
-              </Button>
-            </ListItem>
-          </List>
-        }
-        fixed
-        changeColorOnScroll={{
-          height: 150,
-          color: "white"
-        }}
-      />
+          <Notify />
+          :
+          <Header
+          color={store.headerColor}
+          setColor={store.setHeaderColor}
+          brand="Mahendra Moorti Kalakar"
+          rightLinks={
+            <List className={classes.list}>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/"
+                  className={classes.navLink + " " + classes.navLinkActive}
+                  color="transparent"
+                >
+                  <Explore className={classes.icons} /> Home
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/profile"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  <AccountCircle className={classes.icons} /> Profile
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/shop"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Shop
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/shop/custom-product"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Build
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/orders"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Orders
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/shop"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Contact us
+                </Button>
+              </ListItem>
+            </List>
+          }
+          fixed
+          changeColorOnScroll={{
+            height: 150,
+            color: "white"
+          }}
+        />
     }
   </>
   );

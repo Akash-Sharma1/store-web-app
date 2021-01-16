@@ -8,8 +8,8 @@ import AppBar from "@material-ui/core/AppBar";
 function Notify({ AppStore: store }) {
 
   const closeNotification = () => {
-    if(store.notification.onClose){
-      store.notification.onClose();
+    if(store.notification.onCloseAction){
+      store.notification.onCloseAction();
     }
     store.closeNotification();
   }

@@ -27,27 +27,27 @@ function ProductTile(props) {
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <div className="listing__title">
-            <h3
+            <h4
               className="listing__title--text"
-            >{props.product.name}</h3>
+            >{props.product.name}</h4>
           </div>
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <div className="listing__price">
-            <h5
+            <h6
               style={{
                 marginTop: 0,
               }}
-            >{props.product.price} Rs</h5>
+            >{props.product.price} Rs</h6>
           </div>
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
           <div className={"listing__"+props.product.availablity}>
-            <h5
+            <h6
               style={{
                 marginTop: 0,
               }}
-            >{props.product.availablity}</h5>
+            >{props.product.availablity}</h6>
           </div>
         </GridItem>
       </GridContainer>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -20,12 +20,28 @@ const useStyles = makeStyles(styles);
 
 export default function NavPills(props) {
   const [active, setActive] = React.useState(props.active);
+  
+  useEffect(() => {
+    if(props.forcedValue && props.forcedValue !== active) {
+      setActive(props.forcedValue);
+    }
+  },[props.forcedValue, active]);
+
+
   const handleChange = (event, active) => {
+    if (props.setForcedValue) {
+      props.setForcedValue(active);
+    }
     setActive(active);
   };
+
   const handleChangeIndex = index => {
+    if (props.setForcedValue) {
+      props.setForcedValue(active);
+    }
     setActive(index);
   };
+
   const classes = useStyles();
   const { tabs, direction, color, horizontal, alignCenter } = props;
   const flexContainerClasses = classNames({

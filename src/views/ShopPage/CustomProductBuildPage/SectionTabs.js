@@ -5,9 +5,9 @@ import { mobxify } from 'utils/hoc';
 
 import "assets/scss/custom-products/custom-products.scss";
 
-import CustomTabs from "components/common/CustomTabs/CustomTabsControllable.js";
+import CustomTabs from "components/common/CustomTabs/CustomTabs.js";
 import NewProduct from "./NewProduct/index";
-import TrackEnquiry from "./TrackEnquiry";
+import TrackCustomProducts from "./PastOrders";
 
 import styles from "assets/jss/material-kit-react/views/componentsSections/pillsStyle.js";
 const useStyles = makeStyles(styles);
@@ -16,9 +16,7 @@ function SectionTabs({ CustomProductStore: store }) {
   const classes = useStyles();
   const [activeTab, setActiveTab] = useState(0);
 
-  const switchTab = () => {
-    setActiveTab((activeTab+1)%2);
-  }
+  const switchToTrack = () => setActiveTab(1);
 
   return (
     <div className={classes.section}>
@@ -38,8 +36,8 @@ function SectionTabs({ CustomProductStore: store }) {
           </div>
           <div>
             <CustomTabs
-              value = {activeTab}
-              setValue = {setActiveTab}
+              forcedValue={activeTab}
+              setForcedValue={setActiveTab}
               plainTabs
               headerColor="warning"
               tabs={[
@@ -47,15 +45,15 @@ function SectionTabs({ CustomProductStore: store }) {
                   tabName: "Enquire",
                   tabContent: (
                     <div className="custom-p__container">
-                      <NewProduct switchTab={switchTab}/>
+                      <NewProduct switchTab={switchToTrack}/>
                     </div>
                   )
                 },
                 {
-                  tabName: "Track",
+                  tabName: "Past Enquiries",
                   tabContent: (
                     <div className="custom-p__container">
-                      <TrackEnquiry />
+                      <TrackCustomProducts />
                     </div>
                   )
                 }

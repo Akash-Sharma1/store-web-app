@@ -58,8 +58,6 @@ function NewProduct({ CustomProductStore: store, switchTab, AppStore }) {
     AppStore.setNotificationItem("open", false);
     store.addProduct().then(res => {
       AppStore.setNotification({
-        open: true,
-        color: "success",
         title: "Submitted",
         body: "Product, successfully created",
         icon: Check,
@@ -68,12 +66,10 @@ function NewProduct({ CustomProductStore: store, switchTab, AppStore }) {
       store.clearProduct();
     }).catch(err => {
       AppStore.setNotification({
-        open: true,
         color: "danger",
         title: "Submission Failed",
         body: "Something failed try again!",
         icon: Warning,
-        onCloseAction: switchTab,
       });
     })
   }

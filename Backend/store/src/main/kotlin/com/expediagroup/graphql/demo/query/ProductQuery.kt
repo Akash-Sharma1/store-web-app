@@ -20,12 +20,34 @@ class ProductQuery(
     return product
   }
   
-  fun products() : List<Product> {
-    return productRepository.findAll().filter{ it.name != "CustomProduct" }
+  fun products(page: Long? = 1) : List<Product> {
+    val products = productRepository.findAll().filter{ it.name != "CustomProduct" }
+    val list: MutableList<Product> = mutableListOf();
+    var index: Long = 0
+    var req = page
+    req = req ?: 1
+    products.forEach {
+      if(index >= (req-1)*6 && index < (req-1)*6+6) {
+        list.add(it);
+      }
+      index += 1
+    }
+    return list;
   }
 
-  fun customProducts(userId : Long) : List<CustomProduct>{
+  fun customProducts(userId : Long, page: Long? = 1) : List<CustomProduct>{
     val user = userRepository.findById(userId).get()
-    return customProductRepository.findAllByUser(user)
+    val products = customProductRepository.findAllByUser(user)
+    val list: MutableList<CustomProduct> = mutableListOf();
+    var index: Long = 0
+    var req = page
+    req = req ?: 1
+    products.forEach {
+      if(index >= (req-1)*6 && index < (req-1)*6+6) {
+        list.add(it);
+      }
+      index += 1
+    }
+    return list;
   }
 }

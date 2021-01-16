@@ -8,7 +8,7 @@ import client from "utils/graphql"
 
 class customProductsStore extends ProductStoreClass {
 
-  ADD_CUSTOM_PRODUCT = gql`
+  ADD_PRODUCT = gql`
     mutation AddCustomProduct(
       $userId: Long!, $max_days: Int!, $min_days: Int!,
       $min_price: Float!, $max_price: Float!, $description: String!, $size: Float!
@@ -27,11 +27,13 @@ class customProductsStore extends ProductStoreClass {
     }
   `;
 
-  GET_ALL_CUSTOM_PRODUCTS = gql`
-    query GetCustomProducts($userId: Long!) {
+  GET_PRODUCTS = gql`
+    query GetCustomProducts($userId: Long!, $page: Long) {
       customProducts(
-        userId: $userId
+        userId: $userId,
+        page: $page,
       ) {
+        id
         description
         size
         max_price
@@ -44,12 +46,13 @@ class customProductsStore extends ProductStoreClass {
     }
   `;
 
-  GET_CUSTOM_PRODUCT = gql`
+  GET_PRODUCT = gql`
     query GetCustomProduct($userId: Long!, $id: Long!) {
       customProduct(
         userId: $userId,
         id: $id
       ) {
+        id
         description
         size
         max_price
@@ -62,32 +65,20 @@ class customProductsStore extends ProductStoreClass {
     }
   `;
 
-  UPDATE_CUSTOM_PRODUCT = gql`
-    mutation UpdateCustomProduct(
-      $id: Long!, $max_days: Int!, $min_days: Int!,
-      $min_price: Float!, $max_price: Float!, $description: String!, $size: Float!
-    ) {
-      updateCustomProduct(
-        userId: $userId
-        max_price: $max_price
-        min_price: $min_price
-        min_days: $min_days
-        max_days: $max_days
-        description: $description
-        size: $size
-      ) {
-        id
-      }
-    }
-  `;
-
-  isLoading = false;
-
-  loadingError = false;
+  getProducts = flow(function * (page = null) {
+    this.isLoading = true;
+    var res = yield client.query({
+      query: this.GET_PRODUCTS,
+      variables:{ userId : 1, page },
+    });
+    this.isLoading = false;
+    return res;
+  })
 
   addProduct = flow(function * () {
+    this.isLoading = true;
     var res = yield client.mutate({
-      mutation: this.ADD_CUSTOM_PRODUCT,
+      mutation: this.ADD_PRODUCT,
       variables: {
         userId: 1,
         max_price: this.product.budget[0],
@@ -98,10 +89,9 @@ class customProductsStore extends ProductStoreClass {
         size: this.product.size,
       }
     })
+    this.isLoading = false;
     return res;
   })
-
-  product = {};
 
   clearProduct() {
     let temp = {

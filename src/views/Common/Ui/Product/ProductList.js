@@ -1,40 +1,34 @@
 import React from "react";
 
-import { mobxify } from 'utils/hoc';
 import GridContainer from "components/common/Grid/GridContainer.js";
 import GridItem from "components/common/Grid/GridItem.js";
 import ProductTile from "./ProductTile";
+import CustomProductTile from "./CustomProductTile";
 import Button from "components/common/CustomButtons/Button.js";
-
-import { useQuery } from '@apollo/client';
-
 import "assets/scss/shop/shop.scss";
 
-function Listing({ ProductStore: store }) {
+function ProductList(props) {  
+  const productTiles = props.products.map(p => {
+    let product = null;
+    let buttonRoute = null;
+    if(props.productType === "CustomProduct") {
+      product = <CustomProductTile product={p}/>
+    } else {
+      product = <ProductTile product={p}/>  
+    }
 
-  const { loading, error, data } = useQuery(store.GET_PRODUCTS);
+    if (props.productType === "CustomProduct") {
+      buttonRoute = `/shop/custom-product/${p.id}`;
+    } else {
+      buttonRoute = `/shop/product/${p.id}`;
+    }
 
-  if(loading) {
-    return (
-      <div  className="shop__align-c">
-        <h1><small>Loading..</small></h1>
-      </div>
-    );
-  } else {
-    store.setProducts(data.products);
-  }
-  if(error) {
-    alert(error);
-    return <h1><small>Failed to load, reload..</small></h1>
-  }
-
-  const productTiles = store.products.map(p => (
-    <GridItem
+    return <GridItem
       className="listing__item"
       key={p.id} xs={12} sm={4} md={3}
     >
       <Button
-        href={`/shop/product/${p.id}`}
+        href={buttonRoute}
         color="transparent"
         style={{
           display:"block",
@@ -42,10 +36,10 @@ function Listing({ ProductStore: store }) {
           padding:0
         }}
       >
-        <ProductTile product={p}/>
+        {product}
       </Button>
     </GridItem>
-  ));
+  });
 
   return(
     <div>
@@ -58,5 +52,4 @@ function Listing({ ProductStore: store }) {
   );
 }
 
-export default mobxify('ProductStore')(Listing);
-
+export default ProductList;

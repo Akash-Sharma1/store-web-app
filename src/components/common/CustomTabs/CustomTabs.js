@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -21,7 +21,17 @@ const useStyles = makeStyles(styles);
 export default function CustomTabs(props) {
   const [value, setValue] = React.useState(0);
 
+  useEffect(() => {
+    if(props.forcedValue && props.forcedValue !== value) {
+      setValue(props.forcedValue);
+    }
+  },[props.forcedValue, value]);
+
+
   const handleChange = (event, value) => {
+    if (props.setForcedValue) {
+      props.setForcedValue(value);
+    }
     setValue(value);
   };
   const classes = useStyles();

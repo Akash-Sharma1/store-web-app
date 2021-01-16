@@ -17,8 +17,9 @@ import ProfilePage from "views/ProfilePage/ProfilePage.js";
 import LoginPage from "views/LoginPage/LoginPage.js";
 import HomePage from "views/HomePage";
 import ShopPage from "views/ShopPage";
-import CustomProductPage from "views/CustomProductPage";
+import CustomProductBuildPage from "views/ShopPage/CustomProductBuildPage";
 import ProductPage from "views/ProductPage";
+import CustomProductPage from "views/ProductPage/CustomProductPage";
 import client from "utils/graphql"
 import { ApolloProvider } from '@apollo/client';
 
@@ -37,7 +38,8 @@ ReactDOM.render(
           <Route path="/profile" component={ProfilePage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/components" component={Components} />
-          <Route path="/shop/custom-product" component={CustomProductPage} />
+          <Route path="/shop/custom-product/:id" component={CustomProductPage} />
+          <Route path="/shop/custom-product" component={CustomProductBuildPage} />
           <Route path="/shop/product/:id" component={ProductPage} />
           <Route path="/shop" component={ShopPage} />
           <Route path="/" component={HomePage} />
