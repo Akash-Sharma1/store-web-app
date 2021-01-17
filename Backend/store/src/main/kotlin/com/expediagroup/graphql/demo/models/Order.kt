@@ -10,10 +10,6 @@ data class Order(
   @JoinColumn(name = "user_id")
   var user: User,
 
-  @OneToOne()
-  @JoinColumn(name = "address_id")
-  var address: Address,
-
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "product_id")
   var product: Product,
@@ -21,7 +17,7 @@ data class Order(
   @get: NotNull
   val amount: Float
 ) {
-  var status: Status = Status.ACCEPTED
+  var status: Status = Status.PENDING
 
   var statusDescription : String? = null
 
@@ -30,5 +26,5 @@ data class Order(
 }
 
 enum class Status {
-  ACCEPTED, SHIPPING, INTRANSIT, COMPLETED
+  PENDING, ORDERED, ORDER_ACCEPTED, INPROGRESS, COMPLETED
 }

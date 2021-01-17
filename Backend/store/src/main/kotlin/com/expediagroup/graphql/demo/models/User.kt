@@ -21,15 +21,4 @@ data class User(
   var orders: List<Order> = listOf()
 
   var phone: String? = null
-
-  @OneToMany(mappedBy = "user", cascade = arrayOf(CascadeType.ALL), fetch = FetchType.LAZY)  
-  var addresses: List<Address> = listOf()
-
-  var requestStatus: reqStatus = reqStatus.PENDING
-
-  var requestStatusDescription: String? = null;
-}
-
-enum class reqStatus {
-  PENDING, INREVIEW, COMPLETED, ORDERED
 }

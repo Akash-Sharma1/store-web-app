@@ -39,13 +39,15 @@ class ProductMutations(
 
   fun updateCustomProduct(
     id: Long, max_price: Float?, min_price: Float?, min_days: Int?, max_days: Int?,
-    description: String?, size: Float?
+    description: String?, size: Float?, req_status: ReqStatus?, req_text: String?
   ): CustomProduct{
     var product = customProductRepository.findById(id).get()
     product.min_price = min_price ?: product.min_price
     product.max_price = max_price ?: product.max_price
     product.min_days = min_days ?: product.min_days
     product.max_days = max_days ?: product.max_days
+    product.req_status = req_status ?: product.req_status
+    product.req_text = req_text ?: product.req_text
     product.size = size ?: product.size
     product.description = description ?: product.description
     customProductRepository.save(product)

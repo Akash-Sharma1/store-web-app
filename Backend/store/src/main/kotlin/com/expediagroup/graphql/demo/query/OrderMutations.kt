@@ -9,15 +9,14 @@ import com.expediagroup.graphql.demo.repository.*
 class OrderMutations(
   private val orderRepository: OrderRepository,
   private val userRepository: UserRepository,
-  private val productRepository: ProductRepository,
-  private val addressRepository: AddressRepository
+  private val productRepository: ProductRepository
 ): Mutation {
 
-  fun addOrder(userId: Long, productId: Long, amount: Float, addressId: Long): Order{
-    val user = userRepository.findById(userId).get()
+  fun addOrder(productId: Long): Order{
+    val user = userRepository.findById(1).get()
     val product = productRepository.findById(productId).get()
-    val address = addressRepository.findById(addressId).get()
-    val order = Order(user = user, amount = amount, product = product, address = address)
+    var amount = product.price ?: 0f
+    val order = Order(user = user, amount = amount, product = product)
     orderRepository.save(order)
     return order
   }

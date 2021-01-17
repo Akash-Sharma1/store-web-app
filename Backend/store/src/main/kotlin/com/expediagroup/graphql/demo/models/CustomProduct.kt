@@ -31,6 +31,6 @@ data class CustomProduct(
 }
 
 enum class ReqStatus {
-  REVIEW_PENDING, IN_REVIEW, ANSWER
+  REVIEW_PENDING, IN_REVIEW, REVIEW_COMPLETED
 }
 

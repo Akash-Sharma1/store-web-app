@@ -7,8 +7,7 @@ import com.expediagroup.graphql.demo.repository.*
 
 @Component
 class UserMutations(
-  private val userRepository: UserRepository,
-  private val addressRepository: AddressRepository
+  private val userRepository: UserRepository
 ): Mutation {
 
   fun addUser(name: String, email: String, password: String, phone: String? = null): User{
