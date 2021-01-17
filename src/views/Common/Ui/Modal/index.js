@@ -22,10 +22,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 Transition.displayName = "Transition";
 
 function Modal({
-  open, setOpen, buttonList, defaultText, onCloseAction,
+  open, setOpen, buttonList, title,
+  defaultText, onCloseAction,
 }) {
   const classes = useStyles();
-  const loadingText = `Loading.. please wait`;
+  const loadingText = <span>Loading.. please wait</span>;
 
   const [isLoading, setIsLoading] = useState(null);
   const [text, setText] = useState(defaultText);
@@ -75,8 +76,12 @@ function Modal({
         })
       );
     }
-    console.log(buttons);
   },[]);
+
+  let titleText = title ? title : 'Submit?';
+  if (isLoading) {
+    titleText = '';
+  }
 
   return (
     <>
@@ -106,15 +111,15 @@ function Modal({
         >
           <Close className={classes.modalClose} />
         </IconButton>
-        <h4 className={classes.modalTitle}>Submit ?</h4>
+        <h4 className={classes.modalTitle}>{titleText}</h4>
       </DialogTitle>
       <DialogContent
         id="classic-modal-slide-description"
         className={classes.modalBody}
       >
-        <p>
+        <span>
           {text}
-        </p>
+        </span>
       </DialogContent>
       <DialogActions className={classes.modalFooter}>
         {

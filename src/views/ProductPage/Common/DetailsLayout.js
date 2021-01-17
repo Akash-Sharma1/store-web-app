@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 const useStylesJS = makeStyles(stylesJS);
 
 function DetailsLayout({
-  ELIGIBLE, images, specifications, disabledMessage
+  productId, ELIGIBLE, images, specifications, disabledMessage
 }) {
   const classes = useStyles();
   const classesJS = useStylesJS();
@@ -42,6 +42,7 @@ function DetailsLayout({
   return(
     <div>
       <Modals
+        productId={productId}
         cartModalOpen={cartModalOpen}
         orderModalOpen={orderModalOpen}
         setCartModalOpen={setCartModalOpen}
@@ -56,7 +57,6 @@ function DetailsLayout({
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
               <br />
-
               <Popover
                 classes={{
                   paper: classesJS.popover

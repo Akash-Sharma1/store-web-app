@@ -17,7 +17,7 @@ data class Order(
   @get: NotNull
   val amount: Float
 ) {
-  var status: Status = Status.PENDING
+  var status: OrderStatus = OrderStatus.PENDING
 
   var statusDescription : String? = null
 
@@ -25,6 +25,6 @@ data class Order(
   var id: Long? = null
 }
 
-enum class Status {
+enum class OrderStatus {
   PENDING, ORDERED, ORDER_ACCEPTED, INPROGRESS, COMPLETED
 }

@@ -15,6 +15,7 @@ class productStore {
   products = [];
 
   product = {
+    id:'',
     name: '',
     description: '',
     size: '',

@@ -16,7 +16,6 @@ function TrackCustomProducts({ CustomProductStore: store, AppStore }) {
 
   const getProducts = (page = null) => {
     store.getProducts(page).then(res => {
-      console.log(res);
       store.setProducts(res.data.customProducts);
       if(res.data.customProducts.length === 0) {
         if(page > 1){

@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import Modal from 'views/Common/Ui/Modal'
 import { Redirect } from "react-router-dom";
+import { mobxify } from 'utils/hoc';
+import Warning from "@material-ui/icons/Warning";
 
-export default function Modals({
+function Modals({
+  OrderStore: store, productId, AppStore,
   cartModalOpen, orderModalOpen,
   setCartModalOpen, setOrderModalOpen
 }) {
@@ -11,62 +14,96 @@ export default function Modals({
   const [redirectToOrder, setRedirectToOrder] = useState(false);
   const [redirectToCart, setRedirectToCart] = useState(false);
 
-  const order = () => {
-    setRedirectToOrder(true);
+  const order = async() => {
+    console.log(productId);
+    store.addOrder(productId)
+    .then(res => {
+      setOrderRedirectModalOpen(true);
+    })
+    .catch(err => {
+      AppStore.setNotification({
+        color: "danger",
+        title: "Submission Failed",
+        body: "Something failed try again!",
+        icon: Warning,
+      });
+    })
   }
 
-  const addToCart = () => {
-    setRedirectToCart(true);
+  const addToCart = async() => {
+    store.addToCart(productId)
+    .then(res => {
+      setCartRedirectModalOpen(true);
+    })
+    .catch(err => {
+      AppStore.setNotification({
+        color: "danger",
+        title: "Submission Failed",
+        body: err.toString(),
+        icon: Warning,
+      });
+    })
   }
 
   const OrderModal = <Modal
-    defaultText = {`
-      Are you sure you want to order the product.
-      Click on Order or Close to go back`}
+    defaultText = {
+      <span>
+        Are you sure you want to order the product.<br/>
+        Click on <b>Order</b> or <b>Close</b> to cancel.
+      </span>
+    }
     open={orderModalOpen}
     setOpen={setOrderModalOpen}
     buttonList={[
+      {
+        text: "Close",
+        color: 'info',
+        onClick:() => setOrderModalOpen(false),
+      },
       {
         text: "Order",
         onClick:order,
         color: 'warning',
         async: true,
         triggerLoading: true,
-      },
-      {
-        text: "Close",
-        color: 'info',
-        onClick:() => setOrderModalOpen(false),
       }
     ]}
   />
 
   const CartModal = <Modal
-    defaultText = {`
-      Are you sure you want to add the product in the cart.
-      Click on Add or Close to go back`}
+    defaultText = {
+      <span>
+        Are you sure you want to add the product in the cart.<br/>
+        Click on <b>Add</b> or <b>Close</b> to cancel.
+      </span>
+    }
     open={cartModalOpen}
     setOpen={setCartModalOpen}
     buttonList={[
       {
-        text: "Add",
-        onClick:addToCart,
-        color: 'warning',
-        async: true
-      },
-      {
         text: "Close",
         color: 'info',
         onClick:() => setCartModalOpen(false),
+      },
+      {
+        text: "Add To Cart",
+        onClick:addToCart,
+        color: 'warning',
+        async: true,
+        triggerLoading: true,
       }
     ]}
   />
 
   const OrderRedirectModalOpen = <Modal
-    defaultText = {`
-      Thanks for ordering!!
-      We are commited to provied the best experience to our customers.
-    `}
+    title='Procedd to order page?'
+    defaultText = {
+      <span>
+        Thanks for ordering!!<br />
+        We are commited to provied the best experience to our customers.<br />
+        Click on <b>Order Page</b> to go to orders page.
+      </span>
+    }
     open={orderRedirectModalOpen}
     setOpen={setOrderRedirectModalOpen}
     buttonList={[
@@ -74,20 +111,19 @@ export default function Modals({
         text: "Order Page",
         onClick:() => setRedirectToOrder(true),
         color: 'warning',
-      },
-      {
-        text: "Close",
-        color: 'info',
-        onClick:() => setOrderRedirectModalOpen(false),
       }
     ]}
   />
 
   const CartRedirectModalOpen = <Modal
-    defaultText = {`
-      Product is added to cart!!
-      We are commited to provied the best experience to our customers.
-    `}
+    title='Procedd to order page?'
+    defaultText = {
+      <span>
+        Product is added to cart!!<br />
+        We are commited to provied the best experience to our customers.<br />
+        Click on <b>Order Page</b> to go to orders page.
+      </span>
+    }
     open={cartRedirectModalOpen}
     setOpen={setCartRedirectModalOpen}
     buttonList={[
@@ -95,11 +131,6 @@ export default function Modals({
         text: "Order Page",
         onClick:() => setRedirectToCart(true),
         color: 'warning',
-      },
-      {
-        text: "Close",
-        color: 'info',
-        onClick:() => setCartRedirectModalOpen(false),
       }
     ]}
   />
@@ -113,7 +144,7 @@ export default function Modals({
   }
 
   return (
-    <>
+    <>{productId}
       {OrderModal}
       {CartModal}
       {OrderRedirectModalOpen}
@@ -121,3 +152,5 @@ export default function Modals({
     </>
   );
 }
+
+export default mobxify('OrderStore', 'AppStore')(Modals);

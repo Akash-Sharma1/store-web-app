@@ -20,7 +20,7 @@ function Details(props) {
     );
   }
 
-  const ELIGIBLE = (props.product.req_status === "COMPLETED");
+  const ELIGIBLE = (props.product.req_status === "REVIEW_COMPLETED");
 
   const specification = (
     <GridContainer>
@@ -72,6 +72,7 @@ function Details(props) {
   return(
     <DetailsLayout
       ELIGIBLE={ELIGIBLE}
+      productId={props.product.id}
       images={images}
       specifications={specification}
       disabledMessage={{

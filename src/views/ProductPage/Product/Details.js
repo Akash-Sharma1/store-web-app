@@ -64,6 +64,7 @@ function Details(props) {
   return(
     <DetailsLayout
       ELIGIBLE={INSTOCK}
+      productId={props.product.id}
       images={images}
       specifications={specification}
       disabledMessage={{

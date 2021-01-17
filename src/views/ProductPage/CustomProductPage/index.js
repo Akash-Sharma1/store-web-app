@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import { mobxify } from 'utils/hoc';
 import { makeStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
-import Warning from "@material-ui/icons/Warning";
 
 import "assets/scss/shop/shop.scss";
 import MainBanner from 'views/Common/Ui/Banners/MainBanner';

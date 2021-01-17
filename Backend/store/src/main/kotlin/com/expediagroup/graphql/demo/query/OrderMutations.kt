@@ -21,6 +21,20 @@ class OrderMutations(
     return order
   }
 
+  fun addToCart(productId: Long): Order{
+    val order = addOrder(productId)
+    order.status = OrderStatus.PENDING
+    orderRepository.save(order)
+    return order
+  }
+
+  fun moveToOrdersfromCart(id: Long): Order{
+    val order = orderRepository.findById(id).get()
+    order.status = OrderStatus.ORDERED
+    orderRepository.save(order)
+    return order
+  }
+
   fun removeOrder(id: Long): Order {
     val order = orderRepository.findById(id).get()
     if (orderRepository.existsById(id)) {
