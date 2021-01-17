@@ -13,6 +13,7 @@ export default function MainBanner(props) {
   const classes = useStyles();
   return (
     <Parallax
+      small={props.small}
       filter
       image={props.image}
       id="home-banner"

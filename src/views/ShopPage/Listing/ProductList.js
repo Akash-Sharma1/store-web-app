@@ -25,5 +25,5 @@ function Listing({ ProductStore: store }) {
   );
 }
 
-export default mobxify('ProductStore', 'AppStore')(Listing);
+export default mobxify('ProductStore')(Listing);
 

@@ -28,14 +28,17 @@ export default function StaticBanner(props) {
             <div className="landing-page__item">
               <h1 className={classes.title}>{props.title}</h1>
               <br />
-              <Button
-                color="danger"
-                href={props.buttonRoute}
-                rel="noopener noreferrer"
-              >
-                <i className="fas fa-play" />
-                {props.buttonText}
-              </Button>
+                {!props.noButton &&
+                  <Button
+                    color="danger"
+                    href={props.buttonRoute}
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fas fa-play" />
+                    {props.buttonText}
+                  </Button>
+
+                }
             </div>
           </div>
         </div>

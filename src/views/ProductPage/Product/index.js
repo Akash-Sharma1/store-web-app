@@ -12,14 +12,14 @@ import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import { Redirect } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
-function ProductPage({ CustomProductStore: store, match, AppStore }) {
+function ProductPage({ ProductStore: store, match, AppStore }) {
   const classes = useStyles();
   
   const id = match.params.id;
   useEffect(() => {
     store.getProduct(id)
     .then(res => {
-      store.setProduct(res.data.customProduct);
+      store.setProduct(res.data.product);
       store.setLoadingError(null);
     })
     .catch(err => store.setLoadingError(err))
@@ -61,4 +61,4 @@ function ProductPage({ CustomProductStore: store, match, AppStore }) {
   );
 }
 
-export default mobxify('CustomProductStore', 'AppStore')(ProductPage);
+export default mobxify('ProductStore', 'AppStore')(ProductPage);

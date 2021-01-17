@@ -12,7 +12,7 @@ function TrackCustomProducts({ CustomProductStore: store, AppStore }) {
     store.clearProduct();
     getProducts();
     return () => store.clearProduct();
-  },[]);
+  },[store]);
 
   const getProducts = (page = null) => {
     store.getProducts(page).then(res => {
@@ -27,7 +27,6 @@ function TrackCustomProducts({ CustomProductStore: store, AppStore }) {
         }
       }
     }).catch(err => {
-      console.log(err);
       AppStore.setNotificationItem("open", false);
       AppStore.setNotification({
         color: "danger",
@@ -40,13 +39,16 @@ function TrackCustomProducts({ CustomProductStore: store, AppStore }) {
   }
 
   return (
-    <Listing
-      products={store.products}
-      getProducts={getProducts}
-      maxxPage={maxxPage}
-      activeTab={activePage}
-      setActiveTab={setActivePage}
-    />
+    <>
+      <br/>
+      <Listing
+        products={store.products}
+        getProducts={getProducts}
+        maxxPage={maxxPage}
+        activeTab={activePage}
+        setActiveTab={setActivePage}
+      />
+    </>
   );
 }
 

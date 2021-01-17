@@ -1,34 +1,12 @@
 import {
-  action, makeObservable, observable, flow
+  action, makeObservable, observable, flow, computed
 } from 'mobx';
-import { gql } from '@apollo/client';
 
-import client from "utils/graphql"
+import {GET_PRODUCT, GET_PRODUCTS} from "api/product";
+
+import client from 'utils/graphql'
 
 class productStore {
-
-  GET_PRODUCTS = gql`
-    query GetProduct($page: Long) {
-      products(page : $page){
-        id
-        name
-        price
-        availablity
-      }
-    }
-  `;
-
-  GET_PRODUCT = gql`
-    query GetProduct($id: Long!) {
-      product (id : $id) {
-        id
-        name
-        price
-        description
-        availablity
-      }
-    }
-  `;
 
   isLoading = false;
 
@@ -45,26 +23,52 @@ class productStore {
     images: '',
   };
 
+  filters_MATERIAL = {
+    'Marble': null,
+    'Clay': null,
+    'Sandstone': null,
+    'Makrana Marble': null,
+    'Italian Marble': null,
+  }
+
+  filters_CATEGORY = {
+    'Radha Krishna': null,
+    'Sita Ram': null,
+    'Ganesh Ji': null,
+    'Mandir': null,
+    'Hanuman Ji': null,
+    'Shankar Ji': null,
+  }
+
+  get filteredProducts() {
+    return this.products;
+  }
+
+  setFilterItem(parent, item, value) {
+    if(parent === "MATERIAL") {
+      let temp = this.filters_MATERIAL;
+      temp[item] = value;
+      this.filters_MATERIAL = temp;
+    } else if(parent === "CATEGORY") {
+      let temp = this.filters_CATEGORY;
+      temp[item] = value;
+      this.filters_CATEGORY = temp;
+    }
+  }
+
   setIsLoading(value) {
     this.isLoading = value;
   }
 
-  setProduct(product) {
-    let temp = {
-      name: '',
-      description: '',
-      size: '',
-      price: '',
-      reviews: '',
-      images: '',
-    };
+  setLoadingError(value) {
+    this.loadingError = value;
+  }
 
-    temp.name = product.name;
-    temp.description = product.description;
-    temp.size = product.size;
-    temp.price = product.price;
-    temp.reviews = product.reviews;
-    
+  setProduct(product) {
+    let temp = {};
+    for(var key in product) {
+      temp[key] = product[key];
+    }
     temp.images = [
       {
         image: require('assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg'),
@@ -79,11 +83,11 @@ class productStore {
         description: 'image 1',
       },
     ];
-
     this.product = temp;
   }
 
   setProducts(value) {
+    if(value == null) return;
     this.products = value;
   }
 
@@ -93,10 +97,22 @@ class productStore {
     this.product = temp;
   }
 
+  getProduct = flow(function * (id) {
+    this.isLoading = true;
+    this.loadingError = null;
+    var res = yield client.query({
+      query: GET_PRODUCT,
+      variables:{ id },
+    });
+    this.isLoading = false;
+    return res;
+  })
+
   getProducts = flow(function * (page = null) {
     this.isLoading = true;
+    this.loadingError = null;
     var res = yield client.query({
-      query: this.GET_PRODUCTS,
+      query: GET_PRODUCTS,
       variables:{ page },
     });
     this.isLoading = false;
@@ -105,6 +121,8 @@ class productStore {
 
   constructor() {
     makeObservable(this, {
+      filters_MATERIAL: observable,
+      filters_CATEGORY: observable,
       products: observable,
       product: observable,
       isLoading: observable,
@@ -112,7 +130,10 @@ class productStore {
       setProduct: action.bound,
       setProducts: action.bound,
       setProductItem: action.bound,
-      setIsLoading: action.bound
+      setIsLoading: action.bound,
+      setLoadingError: action.bound,
+      setFilterItem: action.bound,
+      filteredProducts: computed
     });
   }
 }

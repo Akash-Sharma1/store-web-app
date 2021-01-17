@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "mobx-react";
 
 import "assets/scss/material-kit-react.scss?v=1.9.0";
@@ -18,10 +18,11 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import HomePage from "views/HomePage";
 import ShopPage from "views/ShopPage";
 import CustomProductBuildPage from "views/ShopPage/CustomProductBuildPage";
-import ProductPage from "views/ProductPage";
+import ProductPage from "views/ProductPage/Product";
 import CustomProductPage from "views/ProductPage/CustomProductPage";
 import client from "utils/graphql"
 import { ApolloProvider } from '@apollo/client';
+import NotFound404 from "404";
 
 
 var hist = createBrowserHistory();
@@ -35,14 +36,16 @@ ReactDOM.render(
       <HeaderFixed/>
       <Router history={hist}>
         <Switch>
-          <Route path="/profile" component={ProfilePage} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/components" component={Components} />
-          <Route path="/shop/custom-product/:id" component={CustomProductPage} />
-          <Route path="/shop/custom-product" component={CustomProductBuildPage} />
-          <Route path="/shop/product/:id" component={ProductPage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route path="/" component={HomePage} />
+          <Route exact path="/profile" component={ProfilePage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/components" component={Components} />
+          <Route exact path="/shop/custom-product/:id" component={CustomProductPage} />
+          <Route exact path="/shop/custom-products" component={CustomProductBuildPage} />
+          <Route exact path="/shop/product/:id" component={ProductPage} />
+          <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/404" component={NotFound404} />
+          <Redirect to="/404" />
         </Switch>
       </Router>
       <Footer />

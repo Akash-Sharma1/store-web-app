@@ -20,7 +20,7 @@ function Details(props) {
     );
   }
 
-  const ELIGIBLE = (props.product.req_status === "COMPLETED");
+  const INSTOCK = (props.product.availablity === "INSTOCK");
 
   const specification = (
     <GridContainer>
@@ -46,40 +46,32 @@ function Details(props) {
           {
             (props.product.price) ?
               <>{props.product.price} Rs</>
-            : <>Not reviewed Yet</>
+            : <>Not available</>
           }
         </h5>
       </GridItem>
 
       <GridItem xs={12} sm={12} md={12}>
-        <h5 className={"product__req-status"}>
-          <label>Request Status:</label>
+        <h5 className={"product__"+props.product.availablity}>
+          <label>Availablity:</label>
           {' '}
-          {props.product.req_status}
+          {props.product.availablity}
         </h5>
-      </GridItem>
-
-      <GridItem xs={12} sm={12} md={12}>
-        <h6 className="product__description product__word-wrap">
-          <label>Our Message:</label>
-          {' '}
-          {props.product.req_text}
-        </h6>
       </GridItem>
     </GridContainer>
   );
 
   return(
     <DetailsLayout
-      ELIGIBLE={ELIGIBLE}
+      ELIGIBLE={INSTOCK}
       images={images}
       specifications={specification}
       disabledMessage={{
-        title:'Product is currently under review',
+        title:'Product Out of stock',
         text: `
-          We are reviewing your product requirements,
-          we are avaiable 24 x 7 for you,
-          feel free contacting us
+          Product is currenlt unavailable,
+          try out some other products for now,
+          or you can always go to custom build to give us an order
         `
       }}
     />

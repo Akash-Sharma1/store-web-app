@@ -60,7 +60,7 @@ function HeaderFixed({ AppStore: store}) {
               </ListItem>
               <ListItem className={classes.listItem}>
                 <Button
-                  href="/shop/custom-product"
+                  href="/shop/custom-products"
                   className={classes.navLink}
                   color="transparent"
                 >
@@ -89,7 +89,7 @@ function HeaderFixed({ AppStore: store}) {
           }
           fixed
           changeColorOnScroll={{
-            height: 150,
+            height: 50,
             color: "white"
           }}
         />

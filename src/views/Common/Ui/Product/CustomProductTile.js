@@ -31,15 +31,12 @@ function CustomProductTile(props) {
               className="listing__title--text"
               
             >
-              {props.product.description} bdkjawbdjawdvawhdvhwavdhavwhjwad
-              dbkjawbdkawdabwhdbawhdbahwvdhawvdhvawhdvawdvjwvahdvaw dvawhdaw mdawjhdvaw dawdbawdbjawhd
-              dawbdhawbdabwhdjdbawkjdbawkbdkjawbdwahhjdavwhdvhwadbwa dbwakdjbawd waudb awd
-              dwadawbdjkw
+              {props.product.description}
             </h4>
           </div>
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          <div className={"listing__request-status"}>
+          <div className={"listing__req-status"}>
             <h6
               style={{
                 marginTop: 0,

@@ -29,7 +29,7 @@ function HomePage() {
       <StaticBanner
         image = {require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg").default}
         buttonText = "Explore now"
-        buttonRoute = "/shop/custom-product"
+        buttonRoute = "/shop/custom-products"
         title = "Build custom products."
       />
       <SectionProductDisplay />

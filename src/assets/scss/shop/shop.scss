@@ -59,7 +59,7 @@
     text-align: start;
     padding: 0 0.5rem;
   }
-  &__request-status, &__INSTOCK{
+  &__req-status, &__INSTOCK{
     color: $green-500;
     padding: 0 0.5rem;
     text-align: start;
@@ -77,6 +77,13 @@
 .product { 
   &__title{
     color: $black;
+  }
+  &__description {
+    text-transform: capitalize;
+  }
+  &__req-status {
+    color: $green-500;
+    text-align: start;
   }
   &__price {
     color: $red-500;

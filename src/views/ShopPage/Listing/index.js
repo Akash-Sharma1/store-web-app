@@ -1,18 +1,20 @@
 import React, { useEffect, useState }  from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
 import { mobxify } from 'utils/hoc';
 import GridContainer from "components/common/Grid/GridContainer.js";
 import GridItem from "components/common/Grid/GridItem.js";
-import Listing from "./Listing"
-import "assets/scss/shop/shop.scss";
 import Warning from "@material-ui/icons/Warning";
-
 import Pagination from "components/common/Pagination/Pagination.js";
+
+import ProductList from "./ProductList"
+import Filters from "./Filters"
+
+import "assets/scss/shop/shop.scss";
+
 import styles from "assets/jss/material-kit-react/views/componentsSections/pillsStyle.js";
 const useStyles = makeStyles(styles);
 
-function ListingLayout({ ProductStore: store, AppStore }) {
+function Listing({ ProductStore: store, AppStore }) {
   const classes = useStyles();
   const [maxxPage, setMaxxPage] = useState(100);
 
@@ -36,7 +38,7 @@ function ListingLayout({ ProductStore: store, AppStore }) {
   }
 
   useEffect(() => {
-    getProducts()
+    getProducts();
   },[]);
 
   return(
@@ -47,25 +49,12 @@ function ListingLayout({ ProductStore: store, AppStore }) {
             Explore all Products
           </div>
         </div>
-        <div>
-          <h4>
-            <small>
-              Use filters for limiting search results
-            </small>
-          </h4>
-        </div>
         <GridContainer className="listing">
-          <GridItem xs={false} sm={3} md={3}>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={12}>
-                <div className="shop__align-c">
-                  <h6 className="shop__text-c">Filters</h6>
-                </div>
-              </GridItem>
-            </GridContainer>
+          <GridItem xs={12} sm={12} md={2}>
+            <Filters />
           </GridItem>
-          <GridItem xs={12} sm={9} md={9}>
-            <Listing />
+          <GridItem xs={12} sm={12} md={10}>
+            <ProductList />
           </GridItem>
           <GridItem xs={12} sm={12} md={12}>
             <div
@@ -85,4 +74,4 @@ function ListingLayout({ ProductStore: store, AppStore }) {
   );
 }
 
-export default mobxify('ProductStore', 'AppStore')(ListingLayout);
+export default mobxify('ProductStore', 'AppStore')(Listing);
