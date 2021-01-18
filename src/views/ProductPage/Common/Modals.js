@@ -14,8 +14,13 @@ function Modals({
   const [redirectToOrder, setRedirectToOrder] = useState(false);
   const [redirectToCart, setRedirectToCart] = useState(false);
 
+  if(!productId) {
+    return <>
+    Loading
+    </>
+  }
+
   const order = async() => {
-    console.log(productId);
     store.addOrder(productId)
     .then(res => {
       setOrderRedirectModalOpen(true);
@@ -89,8 +94,7 @@ function Modals({
         text: "Add To Cart",
         onClick:addToCart,
         color: 'warning',
-        async: true,
-        triggerLoading: true,
+        async: true
       }
     ]}
   />
@@ -107,6 +111,11 @@ function Modals({
     open={orderRedirectModalOpen}
     setOpen={setOrderRedirectModalOpen}
     buttonList={[
+      {
+        text: "Close",
+        color: 'info',
+        onClick:() => setOrderRedirectModalOpen(false),
+      },
       {
         text: "Order Page",
         onClick:() => setRedirectToOrder(true),
@@ -128,6 +137,11 @@ function Modals({
     setOpen={setCartRedirectModalOpen}
     buttonList={[
       {
+        text: "Close",
+        color: 'info',
+        onClick:() => setCartRedirectModalOpen(false),
+      },
+      {
         text: "Order Page",
         onClick:() => setRedirectToCart(true),
         color: 'warning',
@@ -144,7 +158,7 @@ function Modals({
   }
 
   return (
-    <>{productId}
+    <>
       {OrderModal}
       {CartModal}
       {OrderRedirectModalOpen}

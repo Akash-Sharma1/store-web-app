@@ -50,4 +50,13 @@ class ProductQuery(
     }
     return list;
   }
+
+  fun customProductCount() : Long{
+    return customProductRepository.count()
+  }
+
+  fun productCount() : Long{
+    return productRepository.count()
+  }
+
 }

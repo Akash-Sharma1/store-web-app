@@ -46,6 +46,7 @@
   &__title {
     &--text{
       text-transform: capitalize;
+      color:black;
       white-space: pre-wrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -55,17 +56,17 @@
     padding: 0 0.5rem;
   }
   &__price {
-    color: $red-500;
+    color: $red;
     text-align: start;
     padding: 0 0.5rem;
   }
-  &__req-status, &__INSTOCK{
+  &__req-status, &__INSTOCK, &__ORDERED, &__PENDING{
     color: $green-500;
     padding: 0 0.5rem;
     text-align: start;
   }
   &__OUTOFSTOCK{
-    color: $red-600;
+    color: $red-a400;
     padding: 0 0.5rem;
     text-align: start;
   }

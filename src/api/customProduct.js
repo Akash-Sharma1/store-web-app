@@ -57,7 +57,14 @@ const GET_PRODUCT = gql`
   }
 `;
 
+const PRODUCT_COUNT = gql`
+  query ProductCount {
+    customProductCount
+  }
+`;
+
 export {
+  PRODUCT_COUNT,
   GET_PRODUCTS,
   GET_PRODUCT,
   ADD_PRODUCT

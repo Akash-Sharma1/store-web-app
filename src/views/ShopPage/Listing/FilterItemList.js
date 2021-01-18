@@ -114,7 +114,7 @@ function FilterItemList({ ProductStore: store }) {
             className="shop__full-wh"
             size="sm"
             onClick={() => setFiltersOn(!filtersOn)}
-            color={!filtersOn ? "default" : "primary"}
+            color={!filtersOn ? "white" : "primary"}
           >
             Filters ({filtersOn ? 'ON' : 'OFF'})
           </Button>

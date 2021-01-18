@@ -5,40 +5,25 @@ import classNames from "classnames";
 
 import "assets/scss/shop/shop.scss";
 import MainBanner from 'views/Common/Ui/Banners/MainBanner';
-import Details from "./Details";
+// import Details from "ciews/common/ /Details";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import { Redirect } from "react-router-dom";
 const useStyles = makeStyles(styles);
 
-function ProductPage({ ProductStore: store, match }) {
+function OrderPage({ OrderStore: store, match }) {
   const classes = useStyles();
   
   const id = match.params.id;
+
   useEffect(() => {
-    store.getProduct(id)
+    store.getOrder(id)
     .catch(err => store.setLoadingError(err))
     store.setIsLoading(false);
   }, [id, store]);
 
-  let bannerTitle = store.product.name;
-  if(bannerTitle && bannerTitle.length > 30) {
-    bannerTitle = `${bannerTitle.substring(0,30)}..`
-  }
-
   if (store.loadingError) {
     return <Redirect to="/404" />;
-  }
-
-  let content = null;
-  if (store.isLoading) {
-    content = <div
-      className="shop__align-c"
-    >
-      <h1><small>Loading...</small></h1>
-    </div>
-  } else {
-    content = <Details product = {store.product}/>
   }
 
   return(
@@ -46,14 +31,25 @@ function ProductPage({ ProductStore: store, match }) {
       <MainBanner
         small
         image = {require("assets/img/moorti/yogesh-pedamkar-lmeBk-i3_PI-unsplash.jpg")}
-        title = {bannerTitle}
+        title = 'My Order'
         noButton
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
-        {content}
+        {
+          store.isLoading && <>
+            <div className="shop__align-c">
+              <h1><small>Loading...</small></h1>
+            </div>
+          </>
+        }
+        {
+          !store.isLoading && <>
+            {/* <Details product = {store.order.product}/> */}
+          </>
+        }
       </div>
     </div>
   );
 }
 
-export default mobxify('ProductStore')(ProductPage);
+export default mobxify('OrderStore')(OrderPage);

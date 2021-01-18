@@ -2,12 +2,18 @@ import {
   action, makeObservable, observable, flow, computed
 } from 'mobx';
 
-import {GET_PRODUCT, GET_PRODUCTS} from "api/product";
+import {PRODUCT_COUNT, GET_PRODUCT, GET_PRODUCTS} from "api/product";
 
 import client from 'utils/graphql'
 
 class productStore {
 
+  count = 0;
+
+  currPage = 1;
+
+  maxxPage = 1;
+  
   isLoading = false;
 
   loadingError = null;
@@ -44,7 +50,7 @@ class productStore {
   get filteredProducts() {
     return this.products;
   }
-
+  
   setFilterItem(parent, item, value) {
     if(parent === "MATERIAL") {
       let temp = this.filters_MATERIAL;
@@ -57,14 +63,18 @@ class productStore {
     }
   }
 
+  setCurrPage(value) {
+    this.currPage = value;
+  }
+
   setIsLoading(value) {
     this.isLoading = value;
   }
-
+  
   setLoadingError(value) {
     this.loadingError = value;
   }
-
+  
   setProduct(product) {
     let temp = {};
     for(var key in product) {
@@ -98,6 +108,22 @@ class productStore {
     this.product = temp;
   }
 
+  getCount = flow(function * (fetchPolicy='cache-first') {
+    this.isLoading = true;
+    this.loadingError = null;
+    var res = yield client.query({
+      query: PRODUCT_COUNT,
+      fetchPolicy
+    });
+    this.maxxPage = Math.max(
+      (res.data.productCount/6 + (res.data.productCount%6 ? 1 : 0)), 1);
+    this.currPage = Math.min(this.maxxPage, this.currPage);
+    this.count = res.data.productCount;
+    this.isLoading = false;
+    this.loadingError = null;
+    return res;
+  })
+
   getProduct = flow(function * (id) {
     this.isLoading = true;
     this.loadingError = null;
@@ -105,23 +131,32 @@ class productStore {
       query: GET_PRODUCT,
       variables:{ id },
     });
+    this.setProduct(res.data.product);
     this.isLoading = false;
+    this.loadingError = null;
     return res;
-  })
+  });
 
-  getProducts = flow(function * (page = null) {
+  getProducts = flow(function * (fetchPolicy='cache-first') {
+    yield this.getCount(fetchPolicy);
     this.isLoading = true;
     this.loadingError = null;
     var res = yield client.query({
       query: GET_PRODUCTS,
-      variables:{ page },
+      variables:{ page: this.currPage },
+      fetchPolicy
     });
+    this.setProducts(res.data.products);
     this.isLoading = false;
+    this.loadingError = null;
     return res;
-  })
+  });
 
   constructor() {
     makeObservable(this, {
+      currPage: observable,
+      maxxPage: observable,
+      count: observable,
       filters_MATERIAL: observable,
       filters_CATEGORY: observable,
       products: observable,
@@ -134,7 +169,8 @@ class productStore {
       setIsLoading: action.bound,
       setLoadingError: action.bound,
       setFilterItem: action.bound,
-      filteredProducts: computed
+      setCurrPage: action.bound,
+      filteredProducts: computed,
     });
   }
 }

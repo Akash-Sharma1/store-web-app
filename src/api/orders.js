@@ -7,6 +7,22 @@ const GET_ORDERS = gql`
       product {
         id
         name
+        price
+      }
+      amount
+      status
+    }
+  }
+`;
+
+const GET_CART = gql`
+  query GetCarts($page: Long) {
+    carts(page : $page){
+      id
+      product {
+        id
+        name
+        price
       }
       amount
       status
@@ -22,6 +38,7 @@ const GET_ORDER = gql`
         id
         name
         description
+        price
       }
       amount
       status
@@ -42,7 +59,7 @@ const ADD_TO_CART = gql`
 
 const ADD_ORDER = gql`
   mutation AddToCart($productId: Long!) {
-    addToCart(
+    addOrder(
       productId: $productId,
     ) {
       id
@@ -70,7 +87,22 @@ const MOVE_TO_ORDER = gql`
   }
 `;
 
+const ORDERS_COUNT = gql`
+  query OrderCount {
+    ordersCount
+  }
+`;
+
+const CART_COUNT = gql`
+  query CartCount {
+    cartCount
+  }
+`;
+
 export {
+  ORDERS_COUNT,
+  CART_COUNT,
+  GET_CART,
   GET_ORDERS,
   GET_ORDER,
   ADD_ORDER,

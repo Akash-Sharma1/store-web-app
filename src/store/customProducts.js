@@ -5,9 +5,25 @@ import {
 import {ProductStoreClass} from './products';
 import client from "utils/graphql"
 
-import {GET_PRODUCT, GET_PRODUCTS, ADD_PRODUCT} from "api/customProduct"
+import {PRODUCT_COUNT, GET_PRODUCT, GET_PRODUCTS, ADD_PRODUCT} from "api/customProduct"
 
 class customProductsStore extends ProductStoreClass {
+
+  getCount = flow(function * (fetchPolicy='cache-first') {
+    this.isLoading = true;
+    this.loadingError = null;
+    var res = yield client.query({
+      query: PRODUCT_COUNT,
+      fetchPolicy,
+    });
+    this.maxxPage = Math.max(
+      (res.data.customProductCount/6 + (res.data.customProductCount%6 ? 1 : 0)), 1);
+    this.count = res.data.customProductCount
+    this.currPage = Math.min(this.maxxPage, this.currPage);
+    this.isLoading = false;
+    this.loadingError = null;
+    return res;
+  })
 
   getProduct = flow(function * (id) {
     this.isLoading = true;
@@ -16,18 +32,24 @@ class customProductsStore extends ProductStoreClass {
       query: GET_PRODUCT,
       variables:{ id },
     });
+    this.setProduct(res.data.customProduct);
     this.isLoading = false;
+    this.loadingError = null;
     return res;
   })
 
-  getProducts = flow(function * (page = null) {
+  getProducts = flow(function * (fetchPolicy='cache-first') {
+    yield this.getCount(fetchPolicy);
     this.isLoading = true;
     this.loadingError = null;
     var res = yield client.query({
       query: GET_PRODUCTS,
-      variables:{ userId : 1, page },
+      variables:{ userId: 1, page: this.currPage },
+      fetchPolicy
     });
+    this.setProducts(res.data.customProducts);
     this.isLoading = false;
+    this.loadingError = null;
     return res;
   })
 
@@ -46,7 +68,9 @@ class customProductsStore extends ProductStoreClass {
         size: this.product.size,
       }
     })
+    yield this.getProducts('network-only');
     this.isLoading = false;
+    this.loadingError = null;
     return res;
   })
 

@@ -16,16 +16,9 @@ const useStyles = makeStyles(styles);
 
 function Listing({ ProductStore: store, AppStore }) {
   const classes = useStyles();
-  const [maxxPage, setMaxxPage] = useState(100);
 
-  const getProducts = (page = null) => {
-    store.getProducts(page).then(res => {
-      store.setProducts(res.data.products);
-      if(res.data.products.length === 0 && page > 1) {
-        setMaxxPage(page-1);
-        getProducts(page-1);
-      }
-    }).catch(err => {
+  const getProducts = () => {
+    store.getProducts().then().catch(err => {
       AppStore.setNotificationItem("open", false);
       AppStore.setNotification({
         color: "danger",
@@ -63,7 +56,9 @@ function Listing({ ProductStore: store, AppStore }) {
               <Pagination
                 onClickAction={getProducts}
                 color="info"
-                maxx={maxxPage}
+                maxx={store.maxxPage}
+                forceActivePage={store.currPage}
+                setForceActivePage={store.setCurrPage}
                 scrollTo={300}
               />
             </div>

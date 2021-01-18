@@ -68,7 +68,7 @@ function NewProduct({ CustomProductStore: store, switchTab, AppStore }) {
       AppStore.setNotification({
         color: "danger",
         title: "Submission Failed",
-        body: "Something failed try again!",
+        body: "Rickster",
         icon: Warning,
       });
     })

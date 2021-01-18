@@ -13,17 +13,17 @@ class OrderMutations(
 ): Mutation {
 
   fun addOrder(productId: Long): Order{
-    val user = userRepository.findById(1).get()
-    val product = productRepository.findById(productId).get()
-    var amount = product.price ?: 0f
-    val order = Order(user = user, amount = amount, product = product)
+    val order = addToCart(productId)
+    order.status = OrderStatus.ORDERED
     orderRepository.save(order)
     return order
   }
 
   fun addToCart(productId: Long): Order{
-    val order = addOrder(productId)
-    order.status = OrderStatus.PENDING
+    val user = userRepository.findById(1).get()
+    val product = productRepository.findById(productId).get()
+    var amount = product.price ?: 0f
+    val order = Order(user = user, amount = amount, product = product)
     orderRepository.save(order)
     return order
   }

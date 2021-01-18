@@ -23,8 +23,14 @@ const GET_PRODUCT = gql`
   }
 `;
 
+const PRODUCT_COUNT = gql`
+  query ProductCount {
+    productCount
+  }
+`;
 
 export {
+  PRODUCT_COUNT,
   GET_PRODUCTS,
   GET_PRODUCT
 };

@@ -19,6 +19,8 @@ import HomePage from "views/HomePage";
 import ShopPage from "views/ShopPage";
 import CustomProductBuildPage from "views/ShopPage/CustomProductBuildPage";
 import ProductPage from "views/ProductPage/Product";
+import OrdersPage from "views/OrdersPage";
+import OrderPage from "views/OrdersPage/OrderPage";
 import CustomProductPage from "views/ProductPage/CustomProductPage";
 import client from "utils/graphql"
 import { ApolloProvider } from '@apollo/client';
@@ -43,6 +45,9 @@ ReactDOM.render(
           <Route exact path="/shop/custom-products" component={CustomProductBuildPage} />
           <Route exact path="/shop/product/:id" component={ProductPage} />
           <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/orders/:type" component={OrdersPage} />
+          <Route exact path="/order/:id" component={OrderPage} />
+          <Route exact path="/orders" component={OrdersPage} />
           <Route exact path="/" component={HomePage} />
           <Route exact path="/404" component={NotFound404} />
           <Redirect to="/404" />

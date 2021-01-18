@@ -68,7 +68,7 @@ export default function Pagination(props) {
         top: scrollY,
         behavior: 'smooth'
       });
-    }, 200);
+    }, 200); 
 
     if (setForceActivePage) {
       setForceActivePage(newPage);

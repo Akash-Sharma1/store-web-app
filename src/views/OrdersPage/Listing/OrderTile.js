@@ -5,7 +5,7 @@ import GridItem from "components/common/Grid/GridItem.js";
 
 import "assets/scss/shop/shop.scss";
 
-function ProductTile(props) {
+function OrderTile({ order }) {
   return(
     <div>
       <GridContainer>
@@ -29,25 +29,25 @@ function ProductTile(props) {
           <div className="listing__title">
             <h4
               className="listing__title--text"
-            >{props.product.name}</h4>
+            >{order.product.name}</h4>
           </div>
         </GridItem>
-        <GridItem xs={12} sm={12} md={12}>
+        <GridItem xs={12} sm={12} md={12} style={{color:'black'}}>
           <div className="listing__price">
             <h6
               style={{
                 marginTop: 0,
               }}
-            >{props.product.price} Rs</h6>
+            >{order.amount} Rs</h6>
           </div>
         </GridItem>
         <GridItem xs={12} sm={12} md={12}>
-          <div className={"listing__"+(props.product.availablity || props.product.status)}>
+          <div className={"listing__"+order.status}>
             <h6
               style={{
                 marginTop: 0,
               }}
-            >{props.product.availablity || props.product.status}</h6>
+            >{order.status}</h6>
           </div>
         </GridItem>
       </GridContainer>
@@ -55,4 +55,4 @@ function ProductTile(props) {
   );
 }
 
-export default ProductTile;
+export default OrderTile;

@@ -1,9 +1,9 @@
 import React from "react";
 
-import ProductList from "views/Common/Ui/Product/ProductList";
+import OrderList from "./OrderList";
 import Pagination from "components/common/Pagination/Pagination.js";
 
-function Listing({ products, getProducts, maxxPage, activeTab, setActiveTab }) {
+function Listing({ orders, getOrders, maxxPage, activeTab, setActiveTab }) {
 
   function nothingUi() {
     return (
@@ -15,10 +15,9 @@ function Listing({ products, getProducts, maxxPage, activeTab, setActiveTab }) {
 
   let content = nothingUi();
   
-  if (products && products.length > 0) {
-    content = <ProductList
-      productType="CustomProduct"
-      products={products}
+  if (orders && orders.length > 0) {
+    content = <OrderList
+      orders={orders}
     />
   }
 
@@ -36,8 +35,8 @@ function Listing({ products, getProducts, maxxPage, activeTab, setActiveTab }) {
         <Pagination
           forceActivePage={activeTab}
           setForceActivePage={setActiveTab}
+          onClickAction={getOrders}
           color="info"
-          onClickAction={getProducts}
           maxx={maxxPage}
           scrollTo={400}
         />
