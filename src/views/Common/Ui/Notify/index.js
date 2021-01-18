@@ -3,6 +3,7 @@ import { mobxify } from 'utils/hoc';
 
 import SnackbarContent from "components/common/Snackbar/SnackbarContent.js";
 import Check from "@material-ui/icons/Check";
+import Warning from "@material-ui/icons/Warning";
 
 import AppBar from "@material-ui/core/AppBar";
 function Notify({ AppStore: store }) {
@@ -35,6 +36,11 @@ function Notify({ AppStore: store }) {
     return () => clearTimeout(interval);
   },[store]);
 
+  let icon = Check;
+  if(icon === "warning") {
+    icon = Warning;
+  }
+
   if(store.notification.open) {
     return (
 
@@ -52,7 +58,7 @@ function Notify({ AppStore: store }) {
         close
         closeAction={closeNotification}
         color={store.notification.color}
-        icon={store.notification.icon ? store.notification.icon : Check}
+        icon={icon}
       />
     </AppBar>
     );

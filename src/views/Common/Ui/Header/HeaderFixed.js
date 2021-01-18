@@ -78,6 +78,15 @@ function HeaderFixed({ AppStore: store}) {
               </ListItem>
               <ListItem className={classes.listItem}>
                 <Button
+                  href="/orders/cart"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Cart
+                </Button>
+              </ListItem>
+              <ListItem className={classes.listItem}>
+                <Button
                   href="/shop"
                   className={classes.navLink}
                   color="transparent"

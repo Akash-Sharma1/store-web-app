@@ -5,7 +5,7 @@ import classNames from "classnames";
 
 import "assets/scss/shop/shop.scss";
 import MainBanner from 'views/Common/Ui/Banners/MainBanner';
-// import Details from "ciews/common/ /Details";
+import Details from "./Details";
 
 import styles from "assets/jss/material-kit-react/views/landingPage.js";
 import { Redirect } from "react-router-dom";
@@ -46,7 +46,7 @@ function OrdersPage({ OrderStore: store, match }) {
         }
         {
           !store.isLoading && <>
-            {/* <Details product = {store.order.product}/> */}
+            <Details order = {store.Order}/>
           </>
         }
       </div>

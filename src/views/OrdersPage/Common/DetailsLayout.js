@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { mobxify } from 'utils/hoc';
 
@@ -15,80 +15,97 @@ const useStylesJS = makeStyles(stylesJS);
 
 function DetailsLayout({
   AppStore, OrderStore: store,
-  productId, ELIGIBLE, images, specifications, disabledMessage
+  order, NOTPENDING, images, specifications, disabledMessage
 }) {
   const classes = useStyles();
   const classesJS = useStylesJS();
+
   const [anchorElTop, setAnchorElTop] = React.useState(null);
 
-  if(!productId) {
-    return <></>
+  if(!order.id) {
+    return <>
+    Loading
+    </>
   }
 
   const failedBar = (err) => {
+    console.log(err.toString())
     store.setIsLoading(false);
     AppStore.setNotification({
       color: "danger",
       title: "Submission Failed",
-      body: "Something failed try again!",
-      icon: "Warning",
+      body: err.toString(),
+      icon: "warning",
     });
   } 
 
-  const orderNow = (event, addTo) => {
-    if(!ELIGIBLE) {
+  const cancelOrderModal = (event) => {
+    if(NOTPENDING) {
       setAnchorElTop(event.currentTarget);
       return;
     }
 
-    const orderFunction = async() => {
-      if (addTo === 'cart') {
-        await store.addToCart(productId).catch(failedBar);
-      } else {
-        await store.addToCart(productId).catch(failedBar);
-      }
-    }
-
     let redirectRoute = null;
-    let body = null;
-    let btnText = null;
-
-    if (addTo === 'cart') {
-      redirectRoute = '/orders/cart';
-      body = <>
-        <span>
-          Are you sure you want to <b>Add</b> the product to cart.<br/>
-          Click on <b>Add To Cart</b> to confirm or <b>Close</b> to cancel.
-        </span>
-      </>;
-      btnText = 'Add To Cart';
-    } else {
+    if (NOTPENDING) {
       redirectRoute = '/orders';
-      body = <>
-        <span>
-          Are you sure you want to <b>Order</b> the product.<br/>
-          Click on <b>Order Now</b> to confirm or <b>Close</b> to cancel.
-        </span>
-      </>;
-      btnText = 'Order Now';
+    } else {
+      redirectRoute = '/orders/cart';
     }
 
-    const btnList = [
-      { text: "Close", color: 'info' },
-      {
-        text: btnText,
-        color: 'danger',
-        onClick: orderFunction,
-        async: true,
-        redirect: redirectRoute,
-        triggerLoading: true,
-      }
-    ];
-    AppStore.setModal({ open: false });
+    const cancelFunction = async() => {
+      await store.removeOrder(order.id).catch(failedBar);
+    }
+
     AppStore.setModal({
       open: true,
-      defaultText: body,
-      buttonList: btnList,
+      defaultText: <>
+        <span>
+          Are you sure you want to <b>cancel</b> the order.<br/>
+          Click on <b>Cancel Order</b> or <b>Close</b> to cancel.
+        </span>
+      </>,
+      buttonList: [
+        { text: "Close", color: 'info' },
+        {
+          text: "Cancel Order",
+          color: 'danger',
+          onClick: cancelFunction,
+          async: true,
+          redirect: redirectRoute,
+          triggerLoading: true,
+        }
+      ],
+    });
+  }
+
+  const moveToOrders = () => {
+    if(NOTPENDING) {
+      return;
+    }
+
+    const moveFunction = async() => {
+      await store.moveToOrders(order.id).catch(failedBar);
+    }
+    AppStore.setModal({ open : false });
+    AppStore.setModal({
+      open: true,
+      defaultText: <>
+        <span>
+          Are you sure you want to <b>Order</b>.<br/>
+          Click on <b>Order</b> or <b>Close</b> to cancel.
+        </span>
+      </>,
+      buttonList: [
+        { text: "Close", color: 'info' },
+        {
+          text: "Order",
+          color: 'warning',
+          onClick: moveFunction,
+          async: true,
+          redirect: '/orders',
+          triggerLoading: true,
+        }
+      ],
     });
   }
 
@@ -124,19 +141,30 @@ function DetailsLayout({
                   {disabledMessage.text}
                 </div>
               </Popover>
-
+              { !NOTPENDING && <>
+                  <Button
+                    color={"success"}
+                    onClick={moveToOrders}
+                  >
+                    {"Order"}
+                  </Button>
+                  <br/>
+                </>
+              }
+              <br/><br/>
               <Button
-                color={ELIGIBLE ? "info" : "transparent"}
-                onClick={(e) => orderNow(e, "cart")}
+                color={"info"}
+                href={`/shop/product/${order.id}`}
+                size="sm"
               >
-                Add to cart
+                Got to Product
               </Button>
-              {'  '}
               <Button
-                color={ELIGIBLE ? "warning" : "transparent"}
-                onClick={(e) => orderNow(e, "order")}
+                color={"danger"}
+                onClick={cancelOrderModal}
+                size="sm"
               >
-                Order now
+                {NOTPENDING ? "Cancel order" : "Remove from cart"}
               </Button>
             </GridItem>
 
@@ -152,7 +180,7 @@ function DetailsLayout({
                     }}
                     href="/contact-us"
                     className={classes.navLink + " " + classes.navLinkActive}
-                    color="transparent"
+                    color="info"
                   >
                     contact us
                   </a>

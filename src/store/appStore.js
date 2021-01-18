@@ -13,7 +13,31 @@ class appStore {
     onCloseAction: null,
   };
 
+  modal = {
+    open: false,
+    buttonList: [],
+    title: null,
+    defaultText: '',
+    onCloseAction: null,
+  };
+
   headerColor = 'transparent';
+
+  setModal(value) {
+    let temp = this.modal;
+    temp.open = value.open ? value.open : false;
+    temp.buttonList = value.buttonList ? value.buttonList : [];
+    temp.title = value.title ? value.title : null;
+    temp.defaultText = value.defaultText ? value.defaultText : '';
+    temp.onCloseAction = value.onCloseAction ? value.onCloseAction : null;
+    this.modal = value;
+  }
+  
+  setModalItem(item, value) {
+    let temp = this.modal;
+    temp[item] = value;
+    this.modal = temp;
+  }
 
   setHeaderColor(value) {
     this.headerColor = value;
@@ -50,7 +74,10 @@ class appStore {
 
   constructor() {
     makeObservable(this, {
+      modal: observable,
       notification: observable,
+      setModal: action.bound,
+      setModalItem: action.bound,
       setNotification: action.bound,
       setNotificationItem: action.bound,
       closeNotification: action.bound,

@@ -6,8 +6,6 @@ const GET_ORDERS = gql`
       id
       product {
         id
-        name
-        price
       }
       amount
       status
@@ -21,8 +19,6 @@ const GET_CART = gql`
       id
       product {
         id
-        name
-        price
       }
       amount
       status
@@ -36,9 +32,6 @@ const GET_ORDER = gql`
       id
       product {
         id
-        name
-        description
-        price
       }
       amount
       status
@@ -48,8 +41,8 @@ const GET_ORDER = gql`
 `;
 
 const ADD_TO_CART = gql`
-  mutation AddOrder($productId: Long!) {
-    addOrder(
+  mutation AddToCart($productId: Long!) {
+    addToCart(
       productId: $productId,
     ) {
       id
@@ -58,7 +51,7 @@ const ADD_TO_CART = gql`
 `;
 
 const ADD_ORDER = gql`
-  mutation AddToCart($productId: Long!) {
+  mutation AddOrder($productId: Long!) {
     addOrder(
       productId: $productId,
     ) {
@@ -69,7 +62,7 @@ const ADD_ORDER = gql`
 
 const REMOVE_ORDER = gql`
   mutation RemoveOrder($id: Long!) {
-    addToCart(
+    removeOrder(
       id: $id,
     ) {
       id

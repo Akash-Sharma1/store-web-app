@@ -34,6 +34,7 @@ function BudgetAndDaysSliders({ CustomProductStore: store }) {
         store.setProductItem('days', values);
       });
     }
+    return function cleanup() {};
   },[store]);
 
   return (

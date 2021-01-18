@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { mobxify } from 'utils/hoc';
 
 import { makeStyles } from "@material-ui/core/styles";
 import Slide from "@material-ui/core/Slide";
@@ -14,41 +15,44 @@ import styles from "assets/jss/material-kit-react/views/componentsSections/javas
 
 const useStyles = makeStyles(styles);
 
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
 Transition.displayName = "Transition";
 
-function Modal({
-  open, setOpen, buttonList, title,
-  defaultText, onCloseAction,
-}) {
+function Modal({ AppStore : store }) {
   const classes = useStyles();
   const loadingText = <span>Loading.. please wait</span>;
 
   const [isLoading, setIsLoading] = useState(null);
-  const [text, setText] = useState(defaultText);
+  const [text, setText] = useState('');
   const [buttons, setButtons] = useState(null);
 
   const closeModal = () => {
     if (isLoading) {
       return;
     }
-    if (onCloseAction) {
-      onCloseAction();
+    if (store.modal.onCloseAction) {
+      store.modal.onCloseAction();
     }
-    setText(defaultText);
-    setOpen(false);
+    setText(store.modal.defaultText);
+    store.setModalItem('open', false);
   }
 
   useEffect(() => {
-    if (buttonList) {
+    setText(store.modal.defaultText);
+
+    if (store.modal.buttonList) {
       setButtons(
-        buttonList.map(button => {
+        store.modal.buttonList.map(button => {
           let btnFunction = () => {
-            button.onClick();
+            if(button.onClick) {
+              button.onClick();
+            }
+            if (!button.noClose) {
+              closeModal();
+            }
           }
           if(button.async) {
             btnFunction = async() => {
@@ -56,12 +60,19 @@ function Modal({
                 setIsLoading(true);
                 setText(loadingText);
               }
-              await button.onClick();
+              if(button.onClick) {
+                await button.onClick();
+              }
               if (button.triggerLoading) {
-                setText(defaultText);
+                setText(store.modal.defaultText);
                 setIsLoading(false);
               }
-              closeModal();
+              if (!button.noClose) {
+                closeModal();
+              }
+              if(button.redirect) {
+                window.location.replace(button.redirect);
+              }
             } 
           }
           return <div key={button.text}>
@@ -76,9 +87,9 @@ function Modal({
         })
       );
     }
-  },[]);
+  },[store.modal]);
 
-  let titleText = title ? title : 'Submit?';
+  let titleText = store.modal.title ? store.modal.title : 'Submit?';
   if (isLoading) {
     titleText = '';
   }
@@ -90,7 +101,7 @@ function Modal({
         root: classes.center,
         paper: classes.modal
       }}
-      open={open}
+      open={store.modal.open}
       TransitionComponent={Transition}
       keepMounted
       onClose={closeModal}
@@ -133,4 +144,4 @@ function Modal({
   );
 }
 
-export default Modal;
+export default mobxify('AppStore')(Modal);

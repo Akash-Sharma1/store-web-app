@@ -29,6 +29,14 @@ class orderStore {
 
   loadingError = null;
 
+  get Order() {
+    return this.order;
+  }
+  
+  get Orders() {
+    return this.orders;
+  }
+
   setCurrPage(value) {
     this.currPage = value;
   }
@@ -150,13 +158,11 @@ class orderStore {
       variables: { id }
     })
     this.isLoading = false;
-    yield this.getOrders('network-only');
-    yield this.getCart('network-only');
     this.loadingError = null;
     return res;
   })
 
-  moveToOrder = flow(function * (id) {
+  moveToOrders = flow(function * (id) {
     this.isLoading = true;
     this.loadingError = null;
     var res = yield client.mutate({
@@ -164,8 +170,6 @@ class orderStore {
       variables: { id }
     })
     this.isLoading = false;
-    yield this.getOrders('network-only');
-    yield this.getCart('network-only');
     this.loadingError = null;
     return res;
   })
@@ -197,6 +201,8 @@ class orderStore {
       setIsLoading: action.bound,
       setLoadingError: action.bound,
       setCurrPage: action.bound,
+      Order: computed,
+      Orders: computed,
     });
   }
 }

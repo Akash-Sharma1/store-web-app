@@ -22,6 +22,7 @@ import ProductPage from "views/ProductPage/Product";
 import OrdersListing from "views/OrdersListing";
 import OrdersPage from "views/OrdersPage";
 import CustomProductPage from "views/ProductPage/CustomProductPage";
+import Modal from 'views/Common/Ui/Modal'
 import client from "utils/graphql"
 import { ApolloProvider } from '@apollo/client';
 import NotFound404 from "404";
@@ -35,7 +36,8 @@ window._____APP_STATE_____ = stores;
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Provider {...stores}>
-      <HeaderFixed/>
+      <HeaderFixed />
+      <Modal />
       <Router history={hist}>
         <Switch>
           <Route exact path="/profile" component={ProfilePage} />
