@@ -160,7 +160,7 @@ function DetailsLayout({
                 Got to Product
               </Button>
               <Button
-                color={"danger"}
+                color={NOTPENDING ? "danger" : "transparent"}
                 onClick={cancelOrderModal}
                 size="sm"
               >
