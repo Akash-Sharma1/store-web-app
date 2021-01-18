@@ -75,7 +75,6 @@ class orderStore {
       query: CART_COUNT,
       fetchPolicy
     });
-    console.log(Math.ceil(res.data.cartCount/6));
     this.maxxPage = Math.max(1, Math.ceil(res.data.cartCount/6));
     this.cartCount = res.data.cartCount;
     this.currPage = Math.min(this.maxxPage, this.currPage);
@@ -84,12 +83,12 @@ class orderStore {
     return res;
   })
   
-  getOrder = flow(function * (productId, fetchPolicy='cache-first') {
+  getOrder = flow(function * (id, fetchPolicy='cache-first') {
     this.isLoading = true;
     this.loadingError = null;
     var res = yield client.query({
       query: GET_ORDER,
-      variables:{ productId },
+      variables:{ id },
       fetchPolicy
     });
     this.setOrder(res.data.order);

@@ -13,7 +13,6 @@ function TrackCustomProducts({ CustomProductStore: store, AppStore }) {
   },[store]);
 
   const getProducts = () => {
-    console.log(store.currPage);
     store.getProducts().then()
     .catch(err => {
       AppStore.setNotificationItem("open", false);

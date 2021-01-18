@@ -16,8 +16,7 @@ class customProductsStore extends ProductStoreClass {
       query: PRODUCT_COUNT,
       fetchPolicy,
     });
-    this.maxxPage = Math.max(
-      (res.data.customProductCount/6 + (res.data.customProductCount%6 ? 1 : 0)), 1);
+    this.maxxPage = Math.max(1, Math.ceil(res.data.customProductCount/6));
     this.count = res.data.customProductCount
     this.currPage = Math.min(this.maxxPage, this.currPage);
     this.isLoading = false;

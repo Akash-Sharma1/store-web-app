@@ -115,8 +115,7 @@ class productStore {
       query: PRODUCT_COUNT,
       fetchPolicy
     });
-    this.maxxPage = Math.max(
-      (res.data.productCount/6 + (res.data.productCount%6 ? 1 : 0)), 1);
+    this.maxxPage = Math.max(1, Math.ceil(res.data.productCount/6));
     this.currPage = Math.min(this.maxxPage, this.currPage);
     this.count = res.data.productCount;
     this.isLoading = false;
