@@ -2,5 +2,5 @@ language: java
 jdk:
   - openjdk11
 script:
-  - cd Backend/
+  - cd Backend
   - ./mvnw clean install
