@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 const GET_ORDERS = gql`
-  query GetOrders($page: Long) {
+  query GetOrders($page: Long!) {
     orders(page : $page){
       id
       product {
@@ -14,7 +14,7 @@ const GET_ORDERS = gql`
 `;
 
 const GET_CART = gql`
-  query GetCarts($page: Long) {
+  query GetCarts($page: Long!) {
     carts(page : $page){
       id
       product {

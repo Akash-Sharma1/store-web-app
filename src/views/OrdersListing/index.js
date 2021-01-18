@@ -16,21 +16,22 @@ function OrdersPage({ OrderStore: store, match, AppStore }) {
   const classes = useStyles();
   const OrderType = match.params.type;
 
-  const getOrders = (page = null) => {
+  const getOrders = () => {
     if(OrderType === 'cart') {
-      store.getCart(page).then()
+      store.getCart().then()
       .catch(err => {
         store.setLoadingError(err);
         AppStore.setNotification({
           color: "danger",
-          title: "Failed",
-          body: "Something went wrong",
+          title: "Failed",          
+          body: err.toString(),
+
           icon: Warning,
         });
         store.setIsLoading(false);
       })
     } else {
-      store.getOrders(page).then()
+      store.getOrders().then()
       .catch(err => {
         store.setLoadingError(err);
         AppStore.setNotification({

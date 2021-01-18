@@ -45,7 +45,7 @@ function DetailsLayout({
       if (addTo === 'cart') {
         await store.addToCart(productId).catch(failedBar);
       } else {
-        await store.addToCart(productId).catch(failedBar);
+        await store.addOrder(productId).catch(failedBar);
       }
     }
 

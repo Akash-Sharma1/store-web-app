@@ -109,11 +109,10 @@ class orderStore {
     yield this.getCartCount(fetchPolicy);
     this.isLoading = true;
     this.loadingError = null;
+    console.log(this.currPage);
     var res = yield client.query({
       query: GET_CART,
-      variables: {
-        variables:{ page: this.currpage },
-      },
+      variables: { page: this.currPage },
       fetchPolicy
     });
     this.setOrders(res.data.carts);
@@ -128,7 +127,7 @@ class orderStore {
     this.loadingError = null;
     var res = yield client.query({
       query: GET_ORDERS,
-      variables:{ page: this.currpage },
+      variables:{ page: this.currPage },
       fetchPolicy
     });
     this.setOrders(res.data.orders);

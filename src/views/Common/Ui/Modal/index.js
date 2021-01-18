@@ -50,8 +50,12 @@ function Modal({ AppStore : store }) {
             if(button.onClick) {
               button.onClick();
             }
-            if (!button.noClose) {
-              closeModal();
+            if(button.redirect) {
+              window.location.replace(button.redirect);
+            } else {
+              if (!button.noClose) {
+                closeModal();
+              }
             }
           }
           if(button.async) {
@@ -63,15 +67,16 @@ function Modal({ AppStore : store }) {
               if(button.onClick) {
                 await button.onClick();
               }
-              if (button.triggerLoading) {
-                setText(store.modal.defaultText);
-                setIsLoading(false);
-              }
-              if (!button.noClose) {
-                closeModal();
-              }
               if(button.redirect) {
                 window.location.replace(button.redirect);
+              } else {
+                if (!button.noClose) {
+                  closeModal();
+                }
+                if (button.triggerLoading) {
+                  setText(store.modal.defaultText);
+                  setIsLoading(false);
+                }
               }
             } 
           }

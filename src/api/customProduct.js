@@ -20,7 +20,7 @@ const ADD_PRODUCT = gql`
 `;
 
 const GET_PRODUCTS = gql`
-  query GetCustomProducts($userId: Long!, $page: Long) {
+  query GetCustomProducts($userId: Long!, $page: Long!) {
     customProducts(
       userId: $userId,
       page: $page,
