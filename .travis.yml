@@ -1,7 +1,15 @@
-language: java
+language:
+  - java
+  - node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
 jdk:
   - openjdk11
 before_install:
   - chmod +x build.sh
 script:
-  - ./build.sh
+  - ./build-react.sh
+  - ./build-spring.sh
