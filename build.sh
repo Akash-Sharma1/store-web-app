@@ -1,3 +1,2 @@
 #!/bin/sh
-cd $TRAVIS_BUILD_DIR/backend/
-mvn clean install
+mvn -f $TRAVIS_BUILD_DIR/backend/pom.xml clean install
