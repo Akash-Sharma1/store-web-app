@@ -1,13 +1,10 @@
 language:
-  - java
   - node_js
 node_js:
   - 14.15.4
 cache:
   directories:
     - node_modules
-jdk:
-  - openjdk11
 before_install:
   - chmod +x build-react.sh
   - chmod +x build-spring.sh
