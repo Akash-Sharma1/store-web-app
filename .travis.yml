@@ -3,17 +3,17 @@ jobs:
     - language: java
       jdk: openjdk11
       before_install:
-        - cd Backend/store
         - chmod +x build-spring.sh
+        - cd Backend/store
       script:
         - ./build-spring.sh
 
-    - language: node_js
-      node_js: 14.15.4
-      cache:
-        directories:
-          - node_modules
-      before_install:
-        - chmod +x build-react.sh
-      script:
-        - ./build-react.sh
+    # - language: node_js
+    #   node_js: 14.15.4
+    #   cache:
+    #     directories:
+    #       - node_modules
+    #   before_install:
+    #     - chmod +x build-react.sh
+    #   script:
+    #     - ./build-react.sh
