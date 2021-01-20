@@ -92,6 +92,7 @@ function Modal({ AppStore : store }) {
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[store.modal]);
 
   let titleText = store.modal.title ? store.modal.title : 'Submit?';

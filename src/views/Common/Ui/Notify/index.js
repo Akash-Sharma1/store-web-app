@@ -34,6 +34,7 @@ function Notify({ AppStore: store }) {
     }
 
     return () => clearTimeout(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[store]);
 
   let icon = Check;

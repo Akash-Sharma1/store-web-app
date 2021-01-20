@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { mobxify } from 'utils/hoc';
 
 import Warning from "@material-ui/icons/Warning";
@@ -10,6 +10,7 @@ function TrackCustomProducts({ CustomProductStore: store, AppStore }) {
     store.clearProduct();
     getProducts();
     return () => store.clearProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[store]);
 
   const getProducts = () => {

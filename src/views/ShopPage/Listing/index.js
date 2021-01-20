@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect }  from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { mobxify } from 'utils/hoc';
 import GridContainer from "components/common/Grid/GridContainer.js";
@@ -32,6 +32,7 @@ function Listing({ ProductStore: store, AppStore }) {
 
   useEffect(() => {
     getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   return(

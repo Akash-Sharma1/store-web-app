@@ -106,7 +106,7 @@ export default function Pagination(props) {
     });
 
     setPages(p);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activePage, maxxPages]);
 
   return (

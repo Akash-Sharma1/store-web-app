@@ -47,6 +47,7 @@ function OrdersPage({ OrderStore: store, match, AppStore }) {
 
   useEffect(() => {
     getOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   if (OrderType && OrderType !== "cart") {

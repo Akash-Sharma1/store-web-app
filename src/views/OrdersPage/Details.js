@@ -2,7 +2,6 @@ import React from "react";
 
 import GridContainer from "components/common/Grid/GridContainer.js";
 import GridItem from "components/common/Grid/GridItem.js";
-import SectionCarousel from "views/Common/Ui/Carausal";
 import "assets/scss/shop/shop.scss";
 import DetailsLayout from './Common/DetailsLayout'
 

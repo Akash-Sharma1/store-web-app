@@ -1,7 +1,6 @@
 import {
   action, makeObservable, observable
 } from 'mobx';
-import { gql } from '@apollo/client';
 
 class appStore {
   notification = {
