@@ -7,6 +7,5 @@ cache:
     - node_modules
 before_install:
   - chmod +x build-react.sh
-  - chmod +x build-spring.sh
 script:
   - ./build-react.sh
