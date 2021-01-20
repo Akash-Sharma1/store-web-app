@@ -2,7 +2,7 @@ language:
   - java
   - node_js
 node_js:
-  - 10.23.0
+  - 14.15.4
 cache:
   directories:
     - node_modules
@@ -13,4 +13,3 @@ before_install:
   - chmod +x build-spring.sh
 script:
   - ./build-react.sh
-  - ./build-spring.sh
