@@ -3,8 +3,8 @@ jobs:
     - language: java
       jdk: openjdk11
       before_install:
-        - chmod +x build-spring.sh
         - cd Backend/store
+        - chmod +x build-spring.sh
       script:
         - ./build-spring.sh
 
