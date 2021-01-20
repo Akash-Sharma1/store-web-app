@@ -1,11 +1,28 @@
-language:
-  - node_js
-node_js:
-  - 14.15.4
-cache:
-  directories:
-    - node_modules
-before_install:
-  - chmod +x build-react.sh
-script:
-  - ./build-react.sh
+matrix:
+include:
+  - language: python
+    python: 2.7
+    before_script:
+      - cd backend/tests
+    script:
+      - python -m unittest discover
+
+  - language: java
+    jdk:
+      - openjdk11
+    before_install:
+      - cd Backend/store
+      - chmod +x build-spring.sh
+    script:
+      - ./build-spring.sh
+
+  - language: node_js
+    node_js:
+      - 14.15.4
+    cache:
+      directories:
+        - node_modules
+    before_install:
+      - chmod +x build-react.sh
+    script:
+      - ./build-react.sh
