@@ -1,6 +1,7 @@
 jobs:
   include:
     - stage: "Spring Build"
+      name: "Spring Build"
       language: java
       jdk: openjdk11
       before_install:
@@ -8,8 +9,9 @@ jobs:
         - chmod +x build-spring.sh
       script:
         - ./build-spring.sh
-    
+
     - stage: "Deploy"
+      name: "Deploy"
       language: java
       jdk: openjdk11
       before_install:
@@ -21,6 +23,7 @@ jobs:
         - ./deploy-spring.sh
 
     - stage: "Node Build"
+      name: "Node Build"
       language: node_js
       node_js: 14.15.4
       cache:
