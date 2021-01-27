@@ -1,10 +1,9 @@
 jobs:
   include:
-    -stage: java build
-      - language: java
-        jdk: openjdk11
-        before_install:
-          - cd Backend/store
-          - chmod +x build-spring.sh
-        script:
-          - ./build-spring.sh
+    - language: java
+      jdk: openjdk11
+      before_install:
+        - cd Backend/store
+        - chmod +x build-spring.sh
+      script:
+        - ./build-spring.sh
