@@ -4,3 +4,7 @@ docker run --name mysql-standalone -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATA
 docker build . -t store-web-app-backend
 
 docker run -p 8080:8080 --name store-web-app-backend --link mysql-standalone:mysql -d store-web-app-backend
+
+docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+docker tag store_web_app:travis-final $DOCKER_USERNAME/store_web_app:travis-final
+docker push $DOCKER_USERNAME/store_web_app:travis-final
