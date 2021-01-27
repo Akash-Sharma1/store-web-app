@@ -7,6 +7,6 @@ docker run -p 8080:8080 --name store-web-app-backend --link mysql-standalone:mys
 
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-docker tag store-web-app-backend:travis-final $DOCKER_USERNAME/store-web-app-backend:travis-final
+docker tag store-web-app-backend:latest $DOCKER_USERNAME/store-web-app-backend:latest
 
-docker push $DOCKER_USERNAME/store-web-app-backend:travis-final
+docker push $DOCKER_USERNAME/store-web-app-backend:latest
