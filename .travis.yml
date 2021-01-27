@@ -16,9 +16,7 @@ jobs:
       jdk: openjdk11
       before_install:
         - cd Backend/store
-        - chmod +x build-spring.sh
         - chmod +x deploy-spring.sh
-        - ./build-spring.sh
       script:
         - ./deploy-spring.sh
 
