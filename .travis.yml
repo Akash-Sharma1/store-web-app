@@ -1,14 +1,16 @@
 jobs:
   include:
-    - stage: "Spring Build"
-      name: "Spring Build"
-      language: java
-      jdk: openjdk11
+    - stage: "Build"
+      name: "Build"
+      language: node_js
+      node_js: 14.15.4
+      cache:
+        directories:
+          - node_modules
       before_install:
-        - cd Backend/store
-        - chmod +x build-spring.sh
+        - chmod +x build-react.sh
       script:
-        - ./build-spring.sh
+        - ./build-react.sh
 
     - stage: "Deploy"
       name: "Deploy"
@@ -19,15 +21,3 @@ jobs:
         - chmod +x deploy-spring.sh
       script:
         - ./deploy-spring.sh
-
-    - stage: "Node Build"
-      name: "Node Build"
-      language: node_js
-      node_js: 14.15.4
-      cache:
-        directories:
-          - node_modules
-      before_install:
-        - chmod +x build-react.sh
-      script:
-        - ./build-react.sh
