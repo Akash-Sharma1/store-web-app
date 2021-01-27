@@ -10,3 +10,4 @@ docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 docker tag store-web-app-backend:latest $DOCKER_USERNAME/store-web-app-backend:latest
 
 docker push $DOCKER_USERNAME/store-web-app-backend:latest
+
