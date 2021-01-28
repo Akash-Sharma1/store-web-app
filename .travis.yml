@@ -12,6 +12,18 @@ jobs:
       script:
         - ./build-react.sh
 
+    - stage: "Testing"
+      name: "Testing"
+      language: node_js
+      node_js: 14.15.4
+      cache:
+        directories:
+          - node_modules
+      before_install:
+        - chmod +x test-react.sh
+      script:
+        - ./test-react.sh
+
     - stage: "Deploy"
       name: "Deploy"
       language: java

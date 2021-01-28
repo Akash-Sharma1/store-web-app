@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
 import "assets/scss/landing-page/landing-page.scss"
 
@@ -46,4 +46,9 @@ export default function StaticBanner(props) {
     </div>
   );
 }
-
+StaticBanner.propTypes={
+  image:PropTypes.string,
+  buttonText:PropTypes.string,
+  buttonRoute:PropTypes.string,
+  title:PropTypes.string
+};
